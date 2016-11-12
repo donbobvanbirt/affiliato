@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 
+import SearchPage from './SearchPage';
+
 export default class Layout extends Component {
-  render() {
+  render () {
     return (
-      <div className='container'>
-        <h1 className='text-center'>Redux Express</h1>
+      <div>
+        <h1>NAVBAR</h1>
+        <SearchPage />
       </div>
-    )
+    );
   }
 }

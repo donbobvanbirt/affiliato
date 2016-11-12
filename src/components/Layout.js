@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
 
 import Navbar from './Navbar';
 
 export default class Layout extends Component {
   render() {
     return (
-      <div className='container'>
-        <Navbar />
-        <h1 className='text-center'>Redux Express</h1>
-      </div>
-    )
+        <div className='container'>
+          <Navbar />
+          {this.props.children}
+        </div>
+    );
   }
 }

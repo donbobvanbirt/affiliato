@@ -1,3 +1,15 @@
+body {
+  background-color: #F2F2F2;
+}
+
+.campaign-form {
+  padding: 20px;
+  background-color: white;
+}
+
+.affiliate-link {
+  padding: 0px;
+}
 .orangeColor {
   background-color: #FA7470 !important;
   color: #000 !important;
@@ -5,4 +17,5 @@
 
 .mainNav {
   /*height: 50px;*/
+
 }

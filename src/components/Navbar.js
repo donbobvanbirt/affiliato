@@ -20,11 +20,11 @@ export default class MenuExampleInvertedSegment extends Component {
         active: 'home'
       }
 
-      this.handleItemClick = this.handleItemClick.bind(this);
+      // this.handleItemClick = this.handleItemClick.bind(this);
       this.search = this.search.bind(this);
     }
 
-  handleItemClick(name, path) {
+  handleItemClick = (name, path) => {
     this.setState({ active: name });
     browserHistory.push(path);
   }

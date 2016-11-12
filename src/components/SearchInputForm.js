@@ -28,7 +28,7 @@ export default class SearchInputForm extends Component {
           <Form.Input label='Tags' name='tags' placeholder='Search by Tags' />
           <Form.Input label='Number of Supporters' name='supporters' placeholder='Search by number of Supporters' />
           <Form.Select label='Affiliates' name='affiliates' options={options} placeholder='Affiliates' />
-          <Button basic color='black' icon='search' />
+          <Button className='advancedSearchButton' basic color='black' icon='search' />
         </Form.Group>
         {/* <Form.Group inline>
           <label>Size</label>

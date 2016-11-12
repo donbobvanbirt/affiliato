@@ -20,16 +20,14 @@ export default class MenuExampleInvertedSegment extends Component {
         active: 'home'
       }
 
-      this.handleItemClick = this.handleItemClick.bind(this);
-      this.search = this.search.bind(this);
     }
 
-  handleItemClick(name, path) {
+  handleItemClick = (name, path) => {
     this.setState({ active: name });
     browserHistory.push(path);
   }
 
-  search(e, formInput) {
+  search = (e, formInput) => {
     e.preventDefault();
     let { query } = formInput;
     console.log('serializedForm:', `/search/${encodeURI(query)}`);

@@ -51,7 +51,8 @@ export default class SearchPage extends Component {
       }
     ];
     return (
-      <Card.Group itemsPerRow={4}>
+      // <Card.Group itemsPerRow={4}>
+      <Card.Group>
       {
         campaigns.map((campaign) => {
           return (

@@ -1,5 +1,12 @@
+
 .searchPage {
   /*padding: 20px;*/
+}
+
+.ui.cards>.card {
+    font-size: 1em;
+    left: 7%;
+    margin: 10px;
 }
 
 .searchFilterContainer {
@@ -18,17 +25,34 @@
 }
 
 .advancedSearchButton {
-  margin-top: 19px !important; 
+  margin-top: 19px !important;
 }
-
-body {
-  background-color: #F2F2F2;
-}
-
 
 @media only screen and (max-width: 780px) {
   .searchFilterContainer {
     padding-top: 0px;
     height: 320px;
   }
+}
+
+body {
+  background-color: #F2F2F2;
+}
+
+.campaign-form {
+  padding: 20px;
+  background-color: white;
+}
+
+.affiliate-link {
+  padding: 0px;
+}
+
+.orangeColor {
+  background-color: #FA7470 !important;
+  color: #000 !important;
+}
+
+.mainNav {
+  /*height: 50px;*/
 }

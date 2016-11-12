@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
+import campaign from './campaign';
 
-let sampleReducer = (state = 0) => state;
 
 export default combineReducers({
-  zero: sampleReducer
+  campaign,
 });

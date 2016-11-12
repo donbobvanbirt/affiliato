@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { Container, Button, Form ,Header, Icon} from "semantic-ui-react";
 import * as CampaignActions from '../actions/CampaignActions';
+import { browserHistory } from 'react-router';
 
 @connect(state => ({
   campaign: state.campaign,
@@ -32,6 +33,7 @@ export default class CampaignForm extends Component {
       }
     }
     handler(campaignObj);
+    browserHistory.push('/campaignProfile');
   }
   render() {
     let { campaign } = this.props;

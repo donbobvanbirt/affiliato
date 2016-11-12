@@ -13,7 +13,7 @@ const MONGODB_URI = 'mongodb://localhost/affiliatodb';
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI, (err) => {
   console.log(err || `MongoDB connected to ${MONGODB_URI}`);
-});
+}); //
 
 const app = express();
 const server = require('http').createServer(app);

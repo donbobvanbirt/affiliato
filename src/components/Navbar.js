@@ -30,8 +30,9 @@ export default class MenuExampleInvertedSegment extends Component {
 
   search(e, formInput) {
     e.preventDefault();
+    // let query = e.target.value;
     let { query } = formInput;
-    console.log('serializedForm:', formInput, `/search/${encodeURI(query)}`);
+    console.log('serializedForm:', `/search/${encodeURI(query)}`);
     // call action to search(query);
     // |||||||||||||||||||||||||
     // @#$%^&*()_(*(^&%$))
@@ -56,9 +57,11 @@ export default class MenuExampleInvertedSegment extends Component {
               <Menu.Menu position='right'>
 
                 <Menu.Item>
-                  <Form onSubmit={this.search}>
+                  {/* <Form> */}
+                  <Form onSubmit={this.search.bind(this)}>
                     <Form.Field>
                       <Input name='query' icon='search' id='searchInput' icon={{ name: 'search', link: true}} placeholder='Search' />
+                      {/* <Input name='query' icon='search' id='searchInput' icon={{ name: 'search', link: true}} placeholder='Search' onClick={this.search.bind(this)} /> */}
                     </Form.Field>
                   </Form>
                 </Menu.Item>

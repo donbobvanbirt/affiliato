@@ -1,3 +1,40 @@
+
+.searchPage {
+  /*padding: 20px;*/
+}
+
+.ui.cards>.card {
+    font-size: 1em;
+    left: 7%;
+    margin: 10px;
+}
+
+.searchFilterContainer {
+  height: 250px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 75px;
+  background-color: #FA7470;
+}
+
+.searchListContainer {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.advancedSearchButton {
+  margin-top: 19px !important;
+}
+
+@media only screen and (max-width: 780px) {
+  .searchFilterContainer {
+    padding-top: 0px;
+    height: 320px;
+  }
+}
+
 body {
   background-color: #F2F2F2;
 }
@@ -10,6 +47,7 @@ body {
 .affiliate-link {
   padding: 0px;
 }
+
 .orangeColor {
   background-color: #FA7470 !important;
   color: #000 !important;
@@ -17,5 +55,4 @@ body {
 
 .mainNav {
   /*height: 50px;*/
-
 }

@@ -31,7 +31,6 @@ export default class MenuExampleInvertedSegment extends Component {
 
   search(e, formInput) {
     e.preventDefault();
-    // let query = e.target.value;
     let { query } = formInput;
     console.log('serializedForm:', `/search/${encodeURI(query)}`);
     // call action to search(query);
@@ -41,14 +40,13 @@ export default class MenuExampleInvertedSegment extends Component {
   }
 
   render() {
-    console.log('this.state.active:', this.state.active);
     const { active } = this.state;
     const { user } = this.props;
 
     return (
-      <Segment className='orangeColor' size='large' attached>
+      <Segment className='orangeColor' size='small' attached>
         {!user?
-          <Menu className='orangeColor mainNav' size='large' inverted secondary>
+          <Menu className='orangeColor mainNav' size='small' inverted secondary>
             <Menu.Item name='home' active={active === 'home'} onClick={() => {
               this.handleItemClick('home', '/');
             }} />
@@ -76,7 +74,7 @@ export default class MenuExampleInvertedSegment extends Component {
               </Menu.Menu>
             </Menu>
             :
-            <Menu className='orangeColor mainNav' size='huge' inverted secondary>
+            <Menu className='orangeColor mainNav' size='small' inverted secondary>
               <Menu.Item name='home' active={active === 'home'} onClick={() => {
                 this.handleItemClick('home', '/');
               }} />

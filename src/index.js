@@ -9,6 +9,7 @@ import ClientPage from './components/ClientPage';
 
 render(
   <Provider store={store}>
+
     <Router history={browserHistory}>
       <Route path='/' component={Layout}>
         <Route path='/campaign-form' component={CampaignForm} />
@@ -18,3 +19,14 @@ render(
   </Provider>,
   document.getElementById('root')
 );
+
+
+/*
+ROUTES TO CREATE:
+/createNewCampaign
+/dashboard
+/logout
+/login
+/register
+/
+*/

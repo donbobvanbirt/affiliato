@@ -19,9 +19,11 @@ export default class MenuExampleInvertedSegment extends Component {
       this.state = {
         active: 'home'
       }
+
+      this.handleItemClick = this.handleItemClick.bind(this);
     }
 
-  handleItemClick = (name, path) => {
+  handleItemClick(name, path) {
     this.setState({ active: name });
     browserHistory.push(path);
   }

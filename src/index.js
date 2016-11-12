@@ -12,7 +12,7 @@ render(
 
     <Router history={browserHistory}>
       <Route path='/' component={Layout}>
-        <Route path='/campaign-form' component={CampaignForm} />
+        <Route path='/createNewCampaign' component={CampaignForm} />
         <Route path='/campaign-profile' component={ClientPage} />
       </Route>
     </Router>

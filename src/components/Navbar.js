@@ -43,13 +43,13 @@ export default class MenuExampleInvertedSegment extends Component {
 
     return (
       <Segment className='orangeColor' size='huge' attached>
-          {!user?
-            <Menu className='orangeColor mainNav' size='huge' inverted secondary>
-              <Menu.Item name='home' active={active === 'home'} onClick={() => {
-                this.handleItemClick('home', '/');
-              }} />
-              <Menu.Item name='Create New Campaign' active={active === 'createNewCamp'} onClick={() => {
-                this.handleItemClick('createNewCamp', '/createNewCampaign');
+        {!user?
+          <Menu className='orangeColor mainNav' size='huge' inverted secondary>
+            <Menu.Item name='home' active={active === 'home'} onClick={() => {
+              this.handleItemClick('home', '/');
+            }} />
+            <Menu.Item name='Create New Campaign' active={active === 'createNewCamp'} onClick={() => {
+              this.handleItemClick('createNewCamp', '/createNewCampaign');
               }} />
               <Menu.Menu position='right'>
 

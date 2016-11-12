@@ -1,6 +1,6 @@
 const express = require('express');
+
 const router = express.Router();
-const path = require('path');
 
 const Campaign = require('../models/Campaign');
 
@@ -38,3 +38,5 @@ router.delete('/:id', (req, res) => {
   .then(res.send('Campaign deleted'))
   .catch(err => res.status(400).send(err));
 });
+
+module.exports = router;

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const campaignSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  user: { type: Schema.Types.ObjectId, ref: 'User'},
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   description: { type: String, required: true },
   about: { type: String },
   moneyExplain: { type: String },
@@ -11,7 +11,7 @@ const campaignSchema = new mongoose.Schema({
     url: { type: String, required: true },
     clicks: { type: Number, required: true, default: 0 }
   }],
-  supporters: [{ type: Schema.Types.ObjectId, ref: 'User'}],
+  supporters: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
   assets: {
     header: { type: String, required: true },
     storyImg: { type: String, required: true },

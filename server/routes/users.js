@@ -38,3 +38,5 @@ router.delete('/:id', (req, res) => {
   .then(res.send('user deleted'))
   .catch(err => res.status(400).send(err));
 });
+
+module.exports = router;

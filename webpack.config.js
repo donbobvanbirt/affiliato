@@ -26,7 +26,7 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          presets: ['stage-2', 'es2015', 'react'],
+          presets: ['es2015', 'stage-2', 'react'],
           plugins: ['react-html-attrs', 'transform-decorators-legacy']
         }
       },

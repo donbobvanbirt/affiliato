@@ -1,11 +1,30 @@
 import React, { Component } from 'react';
 import { Card, Icon } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import * as CampaignActions from '../actions/CampaignActions';
 
-export default class SearchPage extends Component {
+@connect(state => ({
+  campaign: state.campaign,
+}), dispatch => ({
+  handler(data) {
+    dispatch(CampaignActions.createCampaign(data));
+  },
+}))
+
+export default class SearchResults extends Component {
   constructor () {
     super();
     this.state = {};
     // this._grabSearchRequest = this._grabSearchRequest.bind(this);
+  }
+
+  // componentWillReceiveProps (nextProps) {
+  //   console.log('nextProps: ', nextProps);
+  // }
+  componentWillMount () {
+    let { query, campaign } = this.props;
+    console.log('query: ', query);
+    console.log('campaign: ', campaign);
   }
 
   // _grabSearchRequest (e, { value }) {

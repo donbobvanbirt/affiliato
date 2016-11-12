@@ -28,7 +28,7 @@ export default class MenuExampleInvertedSegment extends Component {
     browserHistory.push(path);
   }
 
-  search = (e, formInput) => {
+  search(e, formInput) {
     e.preventDefault();
     let { query } = formInput;
     console.log('serializedForm:', formInput, `/search/${encodeURI(query)}`);

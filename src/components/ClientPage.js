@@ -44,12 +44,12 @@ export default class ClientPage extends Component {
         <Grid celled="internally">
           <Grid.Row>
             <Grid.Column width={16}>
-              <Image src={campaign.title} height='1px' fluid />
+              <Image src={campaign.assets ? campaign.assets.header : ''} height='1px' fluid />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
             <Grid.Column textAlign="center" width={3}>
-              <Image src={campaign.assets.profile} shape="circular"/>
+              <Image src={campaign.assets ? campaign.assets.profile : ''} shape="circular"/>
               <Statistic>
                 <Value value='204' />
                 <Label label='Clicks' />
@@ -57,7 +57,7 @@ export default class ClientPage extends Component {
             </Grid.Column>
             <Grid.Column width={8}>
               <Container>
-                <Image src={campaign.assets.storyImg} />
+                <Image src={campaign.assets ? campaign.assets.storyImg : ''} />
                 <Header as='h2' attached='top'>
                   {campaign.title}
                 </Header>
@@ -81,7 +81,7 @@ export default class ClientPage extends Component {
                   <Card.Description>
                     <Input
                       action={{ color: 'teal', labelPosition: 'right', icon: 'copy' }}
-                      defaultValue={campaign.affiliates[0].url}
+                      defaultValue={campaign.affiliates ? campaign.affiliates[0].url : ''}
                     />
                   </Card.Description>
                 </Card.Content>

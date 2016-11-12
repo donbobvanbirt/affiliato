@@ -10,7 +10,7 @@ export function retrieveCreatedCampaign(data) {
 
 export function createCampaign(data){
   return (dispatch) => {
-    axios.post(`/campaign/`, data)
+    axios.post(`/api/campaign/`, data)
     .then(res => res.data)
     .then(data2 => dispatch(retrieveCreatedCampaign(data2)))
     .catch(console.error);

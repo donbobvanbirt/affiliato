@@ -21,6 +21,7 @@ export default class MenuExampleInvertedSegment extends Component {
       }
 
       this.handleItemClick = this.handleItemClick.bind(this);
+      this.search = this.search.bind(this);
     }
 
   handleItemClick(name, path) {

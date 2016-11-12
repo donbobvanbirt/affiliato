@@ -21,3 +21,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 require('./config/webpack')(app);
 
 app.use('/api', require('./routes/api'));
+
+app.use('*', function (request, response) {
+  response.sendFile(path.join(__dirname, '../public/index.html'));
+});

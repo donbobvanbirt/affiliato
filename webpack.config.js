@@ -6,13 +6,12 @@ module.exports = {
   devtool: 'inline-source-map',
   entry: [
     'webpack-hot-middleware/client?reload=true',
-    'bootstrap-loader',
     './src/css/style.css',
     './src/index.js',
   ],
   output: {
-    path: path.resolve('./public'), 
-    publicPath: '/', 
+    path: path.resolve('./public'),
+    publicPath: '/',
     filename: 'bundle.js'
   },
   plugins: [

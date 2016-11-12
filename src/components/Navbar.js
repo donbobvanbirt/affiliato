@@ -44,9 +44,9 @@ export default class MenuExampleInvertedSegment extends Component {
     const { user } = this.props;
 
     return (
-      <Segment className='orangeColor' size='large' attached>
+      <Segment className='orangeColor' size='huge' attached>
         {!user?
-          <Menu className='orangeColor mainNav' size='large' inverted secondary>
+          <Menu className='orangeColor mainNav' size='huge' inverted secondary>
             <Menu.Item name='home' active={active === 'home'} onClick={() => {
               this.handleItemClick('home', '/');
             }} />
@@ -74,7 +74,7 @@ export default class MenuExampleInvertedSegment extends Component {
               </Menu.Menu>
             </Menu>
             :
-            <Menu className='orangeColor mainNav' size='large' inverted secondary>
+            <Menu className='orangeColor mainNav' size='huge' inverted secondary>
               <Menu.Item name='home' active={active === 'home'} onClick={() => {
                 this.handleItemClick('home', '/');
               }} />

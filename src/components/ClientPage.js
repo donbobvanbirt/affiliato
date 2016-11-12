@@ -24,7 +24,7 @@ export default class ClientPage extends Component {
         <Header as='h2' attached='top'>
           Who am I?
         </Header>
-        <Segment attached>
+        <Segment size='huge' attached>
           {campaign.about}
         </Segment>
       </Container>
@@ -34,7 +34,7 @@ export default class ClientPage extends Component {
         <Header as='h2' attached='top'>
           What am I going to spend it on?
         </Header>
-        <Segment attached>
+        <Segment size='huge' attached>
           {campaign.moneyExplain}
         </Segment>
       </Container>
@@ -61,7 +61,7 @@ export default class ClientPage extends Component {
                 <Header as='h2' attached='top'>
                   {campaign.title}
                 </Header>
-                <Segment attached>
+                <Segment size='huge' attached>
                   {campaign.description}
                 </Segment>
               </Container>

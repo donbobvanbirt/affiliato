@@ -19,28 +19,20 @@ export default class MenuExampleInvertedSegment extends Component {
       this.state = {
         active: 'home'
       }
+
+      this.handleItemClick = this.handleItemClick.bind(this);
+      this.search = this.search.bind(this);
     }
 
-  handleItemClick = (name, path) => {
+  handleItemClick(name, path) {
     this.setState({ active: name });
     browserHistory.push(path);
   }
 
-  // search = (e, formInput) => {
-  //   e.preventDefault();
-  //   let { query } = formInput;
-  //   console.log('serializedForm:', formInput, `/search/${encodeURI(query)}`);
-  //   // call action to search(query);
-  //   // |||||||||||||||||||||||||
-  //   // @#$%^&*()_(*(^&%$))
-  //   browserHistory.push(`/search/${encodeURI(query)}`);
-  // }
-
-  search = (e, formInput) => {
+  search(e, formInput) {
     e.preventDefault();
     // let query = e.target.value;
     let { query } = formInput;
-    // console.log('serializedForm:', formInput, `/search/${encodeURI(query)}`);
     console.log('serializedForm:', `/search/${encodeURI(query)}`);
     // call action to search(query);
     // |||||||||||||||||||||||||
@@ -54,9 +46,9 @@ export default class MenuExampleInvertedSegment extends Component {
     const { user } = this.props;
 
     return (
-      <Segment className='orangeColor' size='huge' attached>
+      <Segment className='orangeColor' size='large' attached>
         {!user?
-          <Menu className='orangeColor mainNav' size='huge' inverted secondary>
+          <Menu className='orangeColor mainNav' size='large' inverted secondary>
             <Menu.Item name='home' active={active === 'home'} onClick={() => {
               this.handleItemClick('home', '/');
             }} />

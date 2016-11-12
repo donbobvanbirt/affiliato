@@ -18,23 +18,24 @@ export default class ClientPage extends Component {
     let { Label, Value } = Statistic;
     let who;
     let money;
-    if(campaign.who) {
+    console.log('campaign:', campaign);
+    if(campaign.about) {
       who = <Container>
         <Header as='h2' attached='top'>
           Who am I?
         </Header>
         <Segment attached>
-          {campaign.who}
+          {campaign.about}
         </Segment>
       </Container>
     }
-    if(campaign.money) {
+    if(campaign.moneyExplain) {
       money = <Container>
         <Header as='h2' attached='top'>
           What am I going to spend it on?
         </Header>
         <Segment attached>
-          {campaign.money}
+          {campaign.moneyExplain}
         </Segment>
       </Container>
     }
@@ -43,12 +44,12 @@ export default class ClientPage extends Component {
         <Grid celled="internally">
           <Grid.Row>
             <Grid.Column width={16}>
-              <Image src={campaign.header} height='1px' fluid />
+              <Image src={campaign.title} height='1px' fluid />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
             <Grid.Column textAlign="center" width={3}>
-              <Image src={campaign.profile} shape="circular"/>
+              <Image src={campaign.assets.profile} shape="circular"/>
               <Statistic>
                 <Value value='204' />
                 <Label label='Clicks' />
@@ -56,12 +57,12 @@ export default class ClientPage extends Component {
             </Grid.Column>
             <Grid.Column width={8}>
               <Container>
-                <Image src={campaign.storyImg} />
-                <Header as='h2' border attached='top'>
+                <Image src={campaign.assets.storyImg} />
+                <Header as='h2' attached='top'>
                   {campaign.title}
                 </Header>
                 <Segment attached>
-                  {campaign.campaignDescription}
+                  {campaign.description}
                 </Segment>
               </Container>
               {who}
@@ -80,14 +81,14 @@ export default class ClientPage extends Component {
                   <Card.Description>
                     <Input
                       action={{ color: 'teal', labelPosition: 'right', icon: 'copy' }}
-                      defaultValue={campaign.amazonURL}
+                      defaultValue={campaign.affiliates[0].url}
                     />
                   </Card.Description>
                 </Card.Content>
                 <Container>
                   <Card.Content extra>
                     <div className='ui two buttons'>
-                      <Button basic color='teal'>Direct Link</Button>
+                      <Button basic fluid size="big" color='teal'>Direct Link</Button>
                     </div>
                   </Card.Content>
                 </Container>

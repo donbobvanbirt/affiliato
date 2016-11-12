@@ -14,7 +14,6 @@ export default class CampaignForm extends Component {
   handleSubmit(e, values) {
     e.preventDefault();
     let { handler } = this.props;
-    console.log(values);
     let { title, description, header, profile, storyImg, moneyExplain, amazonURL, about, terms } = values;
     let campaignObj = {
       title,
@@ -32,7 +31,7 @@ export default class CampaignForm extends Component {
         profile
       }
     }
-    handler(values);
+    handler(campaignObj);
   }
   render() {
     let { campaign } = this.props;

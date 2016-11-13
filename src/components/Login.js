@@ -15,6 +15,7 @@ export default class CampaignForm extends Component {
   submitLogin = (e, values) => {
     e.preventDefault();
     console.log('values:', values);
+    // action to check auth(values);
   }
   render() {
     return (

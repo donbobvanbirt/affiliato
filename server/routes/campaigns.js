@@ -23,7 +23,6 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   const { user } = req.body;
   let addedCampaign;
-  // console.log('user:', user);
   Campaign.create(req.body)
   .then((newCampaign) => {
     const campaignId = newCampaign._id;

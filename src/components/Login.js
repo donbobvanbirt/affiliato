@@ -23,13 +23,10 @@ export default class CampaignForm extends Component {
           <Header textAlign="center" as="h1" icon>
             <Icon name="user" />
             Login to Affiliato
-            <Header.Subheader>
-              Include compelling images and descriptions of your story.
-            </Header.Subheader>
           </Header>
           <Form onSubmit={this.submitLogin}>
             <Form.Input label="Username" name="username" placeholder="Username" />
-            <Form.Input label="Password" name="password" placeholder="Password" />
+            <Form.Input label="Password" name="password" placeholder="Password" type='password'/>
             <Button fluid primary type="submit">Login</Button>
           </Form>
         </Container>

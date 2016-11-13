@@ -5,6 +5,30 @@ const router = express.Router();
 const Campaign = require('../models/Campaign');
 const User = require('../models/User');
 
+// ADD AFFILIATE LINK
+router.put('/affiliate/:id', (req, res) => {
+  const { id } = req.params;
+  Campaign.findOneAndUpdate(
+    { _id: id },
+    { $push: { affiliates: req.body } },
+    { safe: true, upsert: true }
+  )
+  .then(updatedCampaign => res.send(updatedCampaign))
+  .catch(err => res.status(400).send(err));
+});
+
+// REMOVE AFFILIATE LINK
+router.delete('/affiliate/:id/:affiliateName', (req, res) => {
+  const { id, affiliateName } = req.params;
+  Campaign.findOneAndUpdate(
+    { _id: id },
+    { $pull: { affiliates: { site: affiliateName } } },
+    { new: true }
+  )
+  .then(updatedCampaign => res.send(updatedCampaign))
+  .catch(err => res.status(400).send(err));
+});
+
 // GET CAMPAIGN
 router.get('/:id', (req, res) => {
   Campaign.find({ _id: req.params.id })

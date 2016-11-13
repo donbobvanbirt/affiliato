@@ -7,6 +7,7 @@ import Layout from './components/Layout';
 import CampaignForm from './components/CampaignForm';
 import ClientPage from './components/ClientPage';
 import SearchPage from './components/SearchPage';
+import Login from './components/Login';
 
 render(
   <Provider store={store}>
@@ -16,6 +17,7 @@ render(
         <Route path='/createNewCampaign' component={CampaignForm} />
         <Route path='/campaignProfile' component={ClientPage} />
         <Route path='/search/:query' component={SearchPage} />
+        <Route path='/login' component={Login} />
       </Route>
     </Router>
   </Provider>,

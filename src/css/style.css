@@ -44,6 +44,13 @@ body {
   background-color: white;
 }
 
+.login-form {
+  padding: 50px;
+  background-color: white;
+  margin-top: 75px;
+  border-radius: 2%;
+}
+
 .affiliate-link {
   padding: 0px;
 }
@@ -55,4 +62,17 @@ body {
 
 .mainNav {
   /*height: 50px;*/
+}
+
+.affiliateCard {
+  padding: 10px !important;
+}
+
+.affiliateButton:hover {
+
+}
+
+.ui.basic.teal.button:hover, .ui.basic.teal.buttons .button:hover {
+  background-color: #00D8E6 !important;
+  color: white;
 }

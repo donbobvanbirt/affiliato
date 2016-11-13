@@ -46,7 +46,7 @@ export default class CampaignForm extends Component {
             Include compelling images and descriptions of your story.
           </Header.Subheader>
         </Header>
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit.bind(this)} size='big'>
           <Form.Group widths="equal">
             <Form.Input label="Name" name="title" placeholder="Campaign Name"/>
             <Form.Input label="Profile Picture" name="profile" placeholder="Link to Profile Pic" />
@@ -60,7 +60,7 @@ export default class CampaignForm extends Component {
             <Form.Input label="Amazon Affiliate Link" name="amazonURL" placeholder="Amazon Affiliate Link" />
           </Form.Group>
           <Form.Checkbox name="terms" label="I agree to the Terms and Conditions"/>
-          <Button fluid primary type="submit">Create Campaign</Button>
+          <Button fluid size="big" primary type="submit">Create Campaign</Button>
         </Form>
       </Container>
     );

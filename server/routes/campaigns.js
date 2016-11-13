@@ -11,7 +11,7 @@ router.put('/affiliate/:id', (req, res) => {
   Campaign.findOneAndUpdate(
     { _id: id },
     { $push: { affiliates: req.body } },
-    { safe: true, upsert: true }
+    { safe: true, upsert: true, new: true }
   )
   .then(updatedCampaign => res.send(updatedCampaign))
   .catch(err => res.status(400).send(err));
@@ -23,6 +23,18 @@ router.delete('/affiliate/:id/:affiliateName', (req, res) => {
   Campaign.findOneAndUpdate(
     { _id: id },
     { $pull: { affiliates: { site: affiliateName } } },
+    { new: true }
+  )
+  .then(updatedCampaign => res.send(updatedCampaign))
+  .catch(err => res.status(400).send(err));
+});
+
+// ADD CLICKS //
+router.put('/click/:id/:affiliateName', (req, res) => {
+  const { id, affiliateName } = req.params;
+  Campaign.findOneAndUpdate(
+    { _id: id, 'affiliates.site': affiliateName },
+    { $inc: { 'affiliates.$.clicks': 1 } },
     { new: true }
   )
   .then(updatedCampaign => res.send(updatedCampaign))
@@ -54,7 +66,7 @@ router.post('/', (req, res) => {
     return User.findOneAndUpdate(
       { _id: user },
       { $push: { campaign: campaignId } },
-      { safe: true, upsert: true }
+      { safe: true, upsert: true, new: true }
     );
   })
   .then(() => res.send(addedCampaign))

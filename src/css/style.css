@@ -44,6 +44,12 @@ body {
   background-color: white;
 }
 
+.login-form {
+  padding: 50px;
+  background-color: white;
+  margin-top: 75px;
+}
+
 .affiliate-link {
   padding: 0px;
 }

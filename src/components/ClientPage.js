@@ -69,7 +69,7 @@ export default class ClientPage extends Component {
               {money}
             </Grid.Column>
             <Grid.Column width={5}>
-              <Card>
+              <Card className='affiliateCard'>
                 <Card.Content>
                   <Image floated='right' size='mini' src='http://www.turnerduckworth.com/media/filer_public/86/18/86187bcc-752a-46f4-94d8-0ce54b98cd46/td-amazon-smile-logo-01-large.jpg' />
                   <Card.Header>
@@ -88,7 +88,7 @@ export default class ClientPage extends Component {
                 <Container>
                   <Card.Content extra>
                     <div className='ui two buttons'>
-                      <Button basic fluid size="big" color='teal'>Direct Link</Button>
+                      <Button className="affiliateButton" basic fluid size="big" color='teal'>Direct Link</Button>
                     </div>
                   </Card.Content>
                 </Container>

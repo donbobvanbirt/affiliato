@@ -56,3 +56,16 @@ body {
 .mainNav {
   /*height: 50px;*/
 }
+
+.affiliateCard {
+  padding: 10px !important;
+}
+
+.affiliateButton:hover {
+
+}
+
+.ui.basic.teal.button:hover, .ui.basic.teal.buttons .button:hover {
+  background-color: #00D8E6 !important;
+  color: white;
+}

@@ -9,6 +9,7 @@ import ClientPage from './components/ClientPage';
 import SearchPage from './components/SearchPage';
 import Home from './components/Home';
 import Login from './components/Login';
+import Dashboard from './components/Dashboard';
 
 render(
   <Provider store={store}>
@@ -20,6 +21,7 @@ render(
         <Route path='/campaignProfile' component={ClientPage} />
         <Route path='/search/:query' component={SearchPage} />
         <Route path='/login' component={Login} />
+        <Route path='/dashboard' component={Dashboard} />
       </Route>
     </Router>
   </Provider>,

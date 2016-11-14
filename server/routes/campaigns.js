@@ -29,6 +29,17 @@ router.delete('/affiliate/:id/:affiliateName', (req, res) => {
   .catch(err => res.status(400).send(err));
 });
 
+// ADD POST
+router.post('/post/:id', (req, res) => {
+  Campaign.findOneAndUpdate(
+    { _id: req.params.id },
+    { $push: { posts: req.body } },
+    { new: true }
+  )
+  .then(updatedCampaign => res.send(updatedCampaign))
+  .catch(err => res.status(400).send(err));
+});
+
 // ADD CLICKS //
 router.put('/click/:id/:affiliateName', (req, res) => {
   const { id, affiliateName } = req.params;

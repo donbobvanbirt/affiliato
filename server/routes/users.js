@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
 
 // UPDATE USER
 router.put('/:id', (req, res) => {
-  User.findOneAndUpdate({ _id: req.params.id }, { $push: req.body }, { new: true })
+  User.findOneAndUpdate({ _id: req.params.id }, { $set: req.body }, { new: true })
   .then(updatedUser => res.send(updatedUser))
   .catch(err => res.status(400).send(err));
 });

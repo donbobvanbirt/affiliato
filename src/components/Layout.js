@@ -8,7 +8,7 @@ import SearchPage from './SearchPage';
 export default class Layout extends Component {
   render () {
     return (
-      <div className='container'>
+      <div>
         <Navbar />
         {this.props.children}
       </div>

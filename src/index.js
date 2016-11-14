@@ -7,15 +7,19 @@ import Layout from './components/Layout';
 import CampaignForm from './components/CampaignForm';
 import ClientPage from './components/ClientPage';
 import SearchPage from './components/SearchPage';
+import Dashboard from './components/Dashboard';
+import Home from './components/Home';
 
 render(
   <Provider store={store}>
 
     <Router history={browserHistory}>
       <Route path='/' component={Layout}>
+        <IndexRoute path='/home' component={Home} />
         <Route path='/createNewCampaign' component={CampaignForm} />
         <Route path='/campaignProfile' component={ClientPage} />
         <Route path='/search/:query' component={SearchPage} />
+        <Route path='/dashboard' component={Dashboard} />
       </Route>
     </Router>
   </Provider>,

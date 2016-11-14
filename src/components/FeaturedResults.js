@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
-// import { Container } from 'semantic-ui-react'
+import * as CampaignActions from '../actions/CampaignActions';
+
 import { Card, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 @connect(state => ({
   campaigns: state.campaigns
 }), dispatch => ({
-  fetchCampaigns() {
-    dispatch(CampaignActions.fetchCampaigns());
+  setCurrentCampaign(campaign) {
+    dispatch(CampaignActions.setCurrentCampaign(campaign));
   },
 }))
 export default class FeaturedResults extends Component {
@@ -16,6 +17,12 @@ export default class FeaturedResults extends Component {
   //   console.log('this.props: ', this.props);
   //   console.log('nextProps: ', nextProps);
   // }
+
+  directToCampaign (campaign) {
+    console.log('campaign: ', campaign);
+    this.props.setCurrentCampaign(campaign);
+    browserHistory.push('/campaignProfile');
+  }
 
   render () {
     let { campaigns } = this.props;
@@ -32,6 +39,7 @@ export default class FeaturedResults extends Component {
              image={campaign.assets.profile}
              header={campaign.title}
              meta={campaign.type}
+             onClick={this.directToCampaign.bind(this, campaign)}
              description={campaign.description}
              extra={(
                <a>

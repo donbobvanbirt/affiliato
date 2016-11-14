@@ -119,7 +119,7 @@ router.post('/', (req, res) => {
     );
   })
   .then(() => res.send(addedCampaign))
-  .catch(err => res.status(400).send(err));
+  .catch(err => res.status(400).send(console.log(err)));
 });
 
 module.exports = router;

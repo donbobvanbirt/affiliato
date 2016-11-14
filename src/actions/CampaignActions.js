@@ -16,6 +16,13 @@ export function receiveCampaigns (campaigns) {
   };
 }
 
+export function setCurrentCampaign (campaign) {
+  return {
+    type: 'SET_CURRENT_CAMPAIGN',
+    payload: campaign
+  }
+}
+
 export function createCampaign(data){
   return (dispatch) => {
     axios.post(`/api/campaign/`, data)

@@ -5,16 +5,12 @@ import moment from 'moment';
 
 import { submitPost, getCampaign } from '../actions/CampaignActions';
 
-const camp = '582a0dd9c28eb63519734218';
+let camp;
 
 class Dashboard extends Component {
   constructor() {
     super();
     this.state = {};
-  }
-
-  componentWillMount() {
-    this.props.getCamp(camp);
   }
 
   submitForm = (e) => {
@@ -30,7 +26,9 @@ class Dashboard extends Component {
   }
 
   render() {
-    const campObj = this.props.campaign[0];
+    const campObj = this.props.campaign;
+    camp = campObj._id;
+    console.log('campObj:', campObj);
     let posts;
     let header;
     let profilePic;
@@ -39,7 +37,7 @@ class Dashboard extends Component {
     let affiliateList = 'You do not yet have any affiliates';
     let postFeed = 'You do not yet have any posts';
 
-    if (campObj) {
+    if (campObj.posts) {
       posts = campObj.posts.reverse();
       header = campObj.assets.header;
       profilePic = campObj.assets.profile;
@@ -56,27 +54,27 @@ class Dashboard extends Component {
                 date={moment(timestamp).format('dddd MMM Do')}
                 summary={title}
                 extraText={body}
-                />
+              />
             );
           })}
 
         </Feed>
       );
-      if(campObj.affiliates.length) {
+      if (campObj.affiliates.length) {
         affiliateList = (
           <List>
             {campObj.affiliates.map((affil, i) => {
               const { clicks, site, url } = affil;
               return (
                 <List.Item key={i}>
-                  <List.Icon name='linkify' />
+                  <List.Icon name="linkify" />
                   <List.Content content={<a href={url} target="_blank" rel="noopener noreferrer">{site}</a>} />
                   <List.Description><Icon name="mouse pointer" /> {clicks} clicks</List.Description>
                 </List.Item>
-              )
+              );
             })}
           </List>
-        )
+        );
       }
     }
 
@@ -121,7 +119,7 @@ class Dashboard extends Component {
   }
 }
 
-const mapStateToProps = state => ({ campaign: state.campaign });
+const mapStateToProps = state => ({ campaign: state.userCampaign });
 
 const mapDispatchToProps = dispatch => ({
   addPost(post, camp) {

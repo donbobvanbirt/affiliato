@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, TextArea, Button, Container, Header, Feed } from 'semantic-ui-react';
+import { Form, Input, TextArea, Button, Container, Header, Feed, Grid, Image, Card } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
@@ -30,17 +30,20 @@ class Dashboard extends Component {
   }
 
   render() {
-    // const { posts } = this.props.campaign[0];
     const campObj = this.props.campaign[0];
-    // console.log('this.props.campaign[0].posts:', this.props.campaign[0].posts);
-    // console.log('campObj.posts', campObj.posts);
     let posts;
-    // let posts = campObj.posts || null;
-
+    let header;
+    let profilePic;
+    let storyImg;
+    let title;
     let postFeed = 'You do not yet have any posts';
 
     if (campObj) {
       posts = campObj.posts.reverse();
+      header = campObj.assets.header;
+      profilePic = campObj.assets.profile;
+      storyImg = campObj.assets.storyImg;
+      title = campObj.title;
       postFeed = (
         <Feed>
           {posts.map((post, i) => {
@@ -62,6 +65,28 @@ class Dashboard extends Component {
 
     return (
       <Container>
+
+        <Grid celled="internally">
+          <Grid.Row>
+            <Grid.Column width={16}>
+              <Image src={header} fluid />
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column width={3}>
+              <Image src={profilePic} fluid />
+              <Header as="h2">{title}</Header>
+            </Grid.Column>
+            <Grid.Column width={10}>
+              <Image src={storyImg} fluid />
+            </Grid.Column>
+            <Grid.Column width={3}>
+              <Header as="h2">Your Affiliate Links:</Header>
+            </Grid.Column>
+
+          </Grid.Row>
+        </Grid>
+
         <Header as="h2">Add Post:</Header>
         <Form onSubmit={this.submitForm}>
           <Form.Group widths="equal">

@@ -3,9 +3,15 @@ import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { Menu, Segment, Input, Form } from 'semantic-ui-react';
 
+import { signOut } from '../actions/auth';
+
 @connect(state=> ({
+  loggedIn: !!state.user._id,
   user: state.user
 }), dispatch => ({
+  signOut() {
+    dispatch(signOut());
+  }
   /*
   search(q) {
     dispatch(search(q));
@@ -30,6 +36,7 @@ export default class Navbar extends Component {
   search = (e, formInput) => {
     e.preventDefault();
     let { query } = formInput;
+    console.log('query: ', query);
     console.log('serializedForm:', `/search/${encodeURI(query)}`);
     // call action to search(query);
     // |||||||||||||||||||||||||
@@ -43,7 +50,7 @@ export default class Navbar extends Component {
 
     return (
       <Segment className='orangeColor' size='huge' attached>
-        {!user?
+        {this.props.loggedIn?
           <Menu className='orangeColor mainNav' size='huge' inverted secondary>
             <Menu.Item name='home' active={active === 'home'} onClick={() => {
               this.handleItemClick('home', '/');
@@ -67,7 +74,8 @@ export default class Navbar extends Component {
                   this.handleItemClick('dashboard', '/dashboard');
                 }} />
                 <Menu.Item name='Log Out' active={active === 'logOut'} onClick={() => {
-                  this.handleItemClick('logOut', '/');
+                  this.props.signOut();
+                  browserHistory.push('/login');
                 }} />
               </Menu.Menu>
             </Menu>

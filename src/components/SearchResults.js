@@ -9,38 +9,40 @@ import * as SearchActions from '../actions/SearchActions';
   campaigns: state.campaigns,
   filteredCampaigns: state.filteredCampaigns,
 }), dispatch => ({
-  resetFilter () {
+  resetFilter() {
     dispatch(SearchActions.resetFilteredCampaigns());
-  }
+  },
 }))
 
 // TODO Allow to search again with the Search NavBar
-// TODO ComponentWillMount include this.props.fetchCampaigns()
+
 // TODO add route for /search
 export default class SearchResults extends Component {
-  constructor () {
+  constructor() {
     super();
     this.state = {};
     // this._grabSearchRequest = this._grabSearchRequest.bind(this);
   }
 
-  componentWillMount () {
-    let { query, campaigns } = this.props;
-    console.log('query in Results: ', query);
-    console.log('campaigns: ', campaigns);
-    let navbarSearch = campaigns.filter((campaign) => {
-      if (campaign.title === query) {
-        console.log('Sanity:Caught Query');
-        return campaign;
-      }
-    });
-    console.log('navbarSearch: ', navbarSearch);
-    this.setState({
-      navbarSearch
-    });
+  componentWillMount() {
+    const { query, campaigns } = this.props;
+    // console.log('query in Results: ', query);
+    // console.log('campaigns: ', campaigns);
+    if (campaigns.length) {
+      let navbarSearch = campaigns.filter((campaign) => {
+        if (campaign.title === query) {
+          console.log('Sanity:Caught Query');
+          return campaign;
+        }
+      });
+      // console.log('navbarSearch: ', navbarSearch);
+      this.setState({
+        navbarSearch
+      });
+    }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     console.log('Sanity:unmounted');
     this.props.resetFilter();
   }
@@ -62,9 +64,9 @@ export default class SearchResults extends Component {
   //   })
   // }
 
-  render () {
+  render() {
     let { campaigns, advSearchQuery, filteredCampaigns } = this.props;
-    let { navbarSearch } = this.state;
+    const { navbarSearch } = this.state;
     // console.log('this.props: ', this.props);
     // console.log('advSearchQuery: ', advSearchQuery);
     // console.log('all campaigns: ', campaigns);

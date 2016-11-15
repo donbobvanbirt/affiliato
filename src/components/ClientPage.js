@@ -7,9 +7,6 @@ import PostsWidget from './PostsWidget';
 @connect(state => ({
   campaign: state.campaign,
 }), dispatch => ({
-  handler(data) {
-    dispatch(CampaignActions.createCampaign(data));
-  },
   trackClick(campaign){
     dispatch(CampaignActions.addClick(campaign));
   }

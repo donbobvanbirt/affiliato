@@ -117,20 +117,22 @@ router.get('/', (req, res) => {
 
 // ADD NEW CAMPAIGN
 router.post('/', (req, res) => {
-  const { user } = req.body;
+  let userId = req.headers['x-user'];
   let addedCampaign;
   Campaign.create(req.body)
   .then((newCampaign) => {
     const campaignId = newCampaign._id;
     addedCampaign = newCampaign;
     return User.findOneAndUpdate(
-      { _id: user },
+      { _id: userId },
       { $push: { campaign: campaignId } },
       { safe: true, upsert: true, new: true }
     );
   })
   .then(() => res.send(addedCampaign))
-  .catch(err => res.status(400).send(console.log(err)));
+  .catch(err => {
+    res.status(400).send(err)
+  });
 });
 
 module.exports = router;

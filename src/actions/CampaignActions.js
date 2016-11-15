@@ -40,6 +40,13 @@ export function receiveCampaign(data) {
   };
 }
 
+export function addedClick(data){
+  return {
+    type: 'UPDATE_CAMPAIGN',
+    payload: data
+  }
+}
+
 export function createCampaign(data) {
   return (dispatch) => {
     axios.post('/api/campaign/', data)
@@ -73,5 +80,13 @@ export function getCampaign(id) {
     .then(res => res.data)
     .then(data2 => dispatch(setCurrentCampaign(data2)))
     .catch(console.error);
+  };
+}
+
+export function addClick(campaign) {
+  return (dispatch) => {
+    axios.put(`/api/campaign/${campaign._id}`, campaign)
+    .then(res => res.data)
+    .then(res2 => dispatch(addedClick(res2)))
   };
 }

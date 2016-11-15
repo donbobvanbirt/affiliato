@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, TextArea, Button, Container, Header, Feed, Grid, Image, Card } from 'semantic-ui-react';
+import { Form, Input, TextArea, Button, Container, Header, Feed, Grid, Image, List, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
@@ -36,6 +36,7 @@ class Dashboard extends Component {
     let profilePic;
     let storyImg;
     let title;
+    let affiliateList = 'You do not yet have any affiliates';
     let postFeed = 'You do not yet have any posts';
 
     if (campObj) {
@@ -55,12 +56,28 @@ class Dashboard extends Component {
                 date={moment(timestamp).format('dddd MMM Do')}
                 summary={title}
                 extraText={body}
-              />
+                />
             );
           })}
 
         </Feed>
       );
+      if(campObj.affiliates.length) {
+        affiliateList = (
+          <List>
+            {campObj.affiliates.map((affil, i) => {
+              const { clicks, site, url } = affil;
+              return (
+                <List.Item key={i}>
+                  <List.Icon name='linkify' />
+                  <List.Content content={<a href={url}>{site}</a>} />
+                  <List.Description><Icon name="mouse pointer" /> {clicks} clicks</List.Description>
+                </List.Item>
+              )
+            })}
+          </List>
+        )
+      }
     }
 
     return (
@@ -82,6 +99,7 @@ class Dashboard extends Component {
             </Grid.Column>
             <Grid.Column width={3}>
               <Header as="h2">Your Affiliate Links:</Header>
+              {affiliateList}
             </Grid.Column>
 
           </Grid.Row>

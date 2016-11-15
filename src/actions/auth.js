@@ -114,8 +114,9 @@ export function initAuth(dispatch) {
             .then(dbUser => {
               dbUser = dbUser.data;
               dbUserHolder = dbUser;
+              console.log('dbUser.campaign:', dbUser.campaign);
               if (dbUser.campaign && dbUser.campaign.length) {
-                return axios.get(`/api/campaigns/${dbUser.data.campaign[0]}`)
+                return axios.get(`/api/campaigns/${dbUser.campaign[0]}`)
               } else {
                 return null;
               }

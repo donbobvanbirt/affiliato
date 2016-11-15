@@ -22,7 +22,7 @@ export default class SearchPage extends Component {
     return (
       <Container className='searchPage'>
         {/* <div className='searchFilterContainer'> */}
-        <Segment fluid padded textAlign='center' className="searchInputSegment">
+        <Segment padded textAlign='center' className="searchInputSegment">
           <SearchInputForm />
         </Segment>
         {/* </div> */}

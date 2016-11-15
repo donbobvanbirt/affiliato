@@ -17,6 +17,7 @@ export function receiveCampaigns(campaigns) {
 }
 
 export function setCurrentCampaign(campaign) {
+  console.log('current campaign:', campaign);
   return {
     type: 'SET_CURRENT_CAMPAIGN',
     payload: campaign,
@@ -70,7 +71,7 @@ export function getCampaign(id) {
   return (dispatch) => {
     axios.get(`/api/campaign/${id}`)
     .then(res => res.data)
-    .then(data2 => dispatch(getCampaign(data2)))
+    .then(data2 => dispatch(setCurrentCampaign(data2)))
     .catch(console.error);
   };
 }

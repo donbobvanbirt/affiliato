@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { Container, Button, Form ,Header, Icon, Grid, Image, Card, Input, Statistic , Segment} from "semantic-ui-react";
 import * as CampaignActions from '../actions/CampaignActions';
+import PostsWidget from './PostsWidget';
 
 @connect(state => ({
   campaign: state.campaign,
@@ -78,6 +79,14 @@ export default class ClientPage extends Component {
               </Container>
               {who}
               {money}
+              <Container>
+                <Header as='h2' attached='top'>
+                  Recent Posts
+                </Header>
+
+                <PostsWidget posts={campaign.posts} profile={campaign.assets.profile} />
+
+              </Container>
             </Grid.Column>
             <Grid.Column width={5}>
               <Card className='affiliateCard'>

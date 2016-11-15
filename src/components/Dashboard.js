@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Form, Input, TextArea, Button, Container, Header, Feed, Grid, Image, List, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-
 import { submitPost, getCampaign } from '../actions/CampaignActions';
 
 let camp;

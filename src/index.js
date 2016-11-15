@@ -20,6 +20,7 @@ render(
         <Route path='/createNewCampaign' component={CampaignForm} />
         <Route path='/campaignProfile' component={ClientPage} />
         <Route path='/search/:query' component={SearchPage} />
+        <Route path='/search/' component={SearchPage} />
         <Route path='/login' component={Login} />
         <Route path='/dashboard' component={Dashboard} />
       </Route>

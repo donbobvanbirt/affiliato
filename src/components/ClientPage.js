@@ -6,19 +6,29 @@ import * as CampaignActions from '../actions/CampaignActions';
 @connect(state => ({
   campaign: state.campaign,
 }), dispatch => ({
-  handler(data) {
-    dispatch(CampaignActions.createCampaign(data));
-  },
+  trackClick(campaign){
+    dispatch(CampaignActions.addClick(campaign));
+  }
 }))
 
 export default class ClientPage extends Component {
+
+  trackClick() {
+    let { campaign, trackClick } = this.props;
+    campaign.affiliates[0].clicks++;
+    trackClick(campaign)
+  }
 
   render() {
     let { campaign } = this.props;
     let { Label, Value } = Statistic;
     let who;
     let money;
-    console.log('campaign:', campaign);
+    let amazonLink;
+    let amazon = campaign.affiliates[0];
+    if(amazon) {
+      amazonLink = amazon.url
+    }
     if(campaign.about) {
       who = <Container>
         <Header as='h2' attached='top'>
@@ -51,7 +61,7 @@ export default class ClientPage extends Component {
             <Grid.Column textAlign="center" width={3}>
               <Image src={campaign.assets ? campaign.assets.profile : ''} shape="circular"/>
               <Statistic>
-                <Value value='204' />
+                <Value value={campaign.affiliates[0].clicks} />
                 <Label label='Clicks' />
               </Statistic>
             </Grid.Column>
@@ -81,14 +91,14 @@ export default class ClientPage extends Component {
                   <Card.Description>
                     <Input
                       action={{ color: 'teal', labelPosition: 'right', icon: 'copy' }}
-                      defaultValue={campaign.affiliates ? campaign.affiliates[0].url : ''}
+                      defaultValue={amazonLink}
                     />
                   </Card.Description>
                 </Card.Content>
                 <Container>
                   <Card.Content extra>
                     <div className='ui two buttons'>
-                      <Button className="affiliateButton" basic fluid size="big" color='teal'>Direct Link</Button>
+                      <Button className="affiliateButton" basic fluid size="big" color='teal' onClick={this.trackClick.bind(this)}>Direct Link</Button>
                     </div>
                   </Card.Content>
                 </Container>

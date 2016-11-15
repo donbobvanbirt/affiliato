@@ -95,6 +95,10 @@ body {
   color: white;
 }
 
+ HEAD
+.or {
+  margin-top: -30px;
+}
 
 /*for the Card divs on the home page*/
 .ui.card>.image {

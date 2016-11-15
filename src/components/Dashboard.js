@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Form, Input, TextArea, Button, Container, Header } from 'semantic-ui-react';
+import { Form, Input, TextArea, Button, Container, Header, Feed, Grid, Image, List, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
-import { submitPost } from '../actions/CampaignActions';
+import { submitPost, getCampaign } from '../actions/CampaignActions';
 
 const camp = '582a0dd9c28eb63519734218';
 
@@ -13,13 +14,11 @@ class Dashboard extends Component {
   }
 
   componentWillMount() {
-    
+    this.props.getCamp(camp);
   }
 
   submitForm = (e) => {
     e.preventDefault();
-    // const { title, body } = this.state;
-    // console.log('this.state:', this.state);
     this.props.addPost(this.state, camp);
   }
 
@@ -31,8 +30,81 @@ class Dashboard extends Component {
   }
 
   render() {
+    const campObj = this.props.campaign[0];
+    let posts;
+    let header;
+    let profilePic;
+    let storyImg;
+    let title;
+    let affiliateList = 'You do not yet have any affiliates';
+    let postFeed = 'You do not yet have any posts';
+
+    if (campObj) {
+      posts = campObj.posts.reverse();
+      header = campObj.assets.header;
+      profilePic = campObj.assets.profile;
+      storyImg = campObj.assets.storyImg;
+      title = campObj.title;
+      postFeed = (
+        <Feed>
+          {posts.map((post, i) => {
+            const { title, body, timestamp } = post;
+            return (
+              <Feed.Event
+                key={i}
+                icon="pencil"
+                date={moment(timestamp).format('dddd MMM Do')}
+                summary={title}
+                extraText={body}
+                />
+            );
+          })}
+
+        </Feed>
+      );
+      if(campObj.affiliates.length) {
+        affiliateList = (
+          <List>
+            {campObj.affiliates.map((affil, i) => {
+              const { clicks, site, url } = affil;
+              return (
+                <List.Item key={i}>
+                  <List.Icon name='linkify' />
+                  <List.Content content={<a href={url}>{site}</a>} />
+                  <List.Description><Icon name="mouse pointer" /> {clicks} clicks</List.Description>
+                </List.Item>
+              )
+            })}
+          </List>
+        )
+      }
+    }
+
     return (
       <Container>
+
+        <Grid celled="internally">
+          <Grid.Row>
+            <Grid.Column width={16}>
+              <Image src={header} fluid />
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column width={3}>
+              <Image src={profilePic} fluid />
+              <Header as="h2">{title}</Header>
+            </Grid.Column>
+            <Grid.Column width={10}>
+              <Image src={storyImg} fluid />
+            </Grid.Column>
+            <Grid.Column width={3}>
+              <Header as="h2">Your Affiliate Links:</Header>
+              {affiliateList}
+            </Grid.Column>
+
+          </Grid.Row>
+        </Grid>
+
         <Header as="h2">Add Post:</Header>
         <Form onSubmit={this.submitForm}>
           <Form.Group widths="equal">
@@ -41,15 +113,23 @@ class Dashboard extends Component {
           <Form.Field control={TextArea} label="body" name="body" onChange={this.handleChange} placeholder="Start typing..." />
           <Form.Field control={Button}>Submit</Form.Field>
         </Form>
+
+        <Header as="h2">Your Posts:</Header>
+        {postFeed}
       </Container>
     );
   }
 }
 
+const mapStateToProps = state => ({ campaign: state.campaign });
+
 const mapDispatchToProps = dispatch => ({
   addPost(post, camp) {
     dispatch(submitPost(post, camp));
   },
+  getCamp(campaign) {
+    dispatch(getCampaign(campaign));
+  },
 });
 
-export default connect(null, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

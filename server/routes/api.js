@@ -1,7 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-router.use('/user', require('./users'));
-router.use('/campaign', require('./campaigns'));
+router.use('/users', require('./users'));
+router.use('/campaigns', require('./campaigns'));
+
+// for auth testing
+router.use('/secret', require('./secret'));
+
 
 module.exports = router;

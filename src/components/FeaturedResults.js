@@ -32,7 +32,6 @@ export default class FeaturedResults extends Component {
     if (campaigns.length) {
       Campaigns =
         campaigns.map((campaign) => {
-         console.log('campaign: ', campaign);
          return (
            <Card key={campaign._id}
              raised

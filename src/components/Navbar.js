@@ -12,7 +12,7 @@ import { Menu, Segment, Input, Form } from 'semantic-ui-react';
   }
   */
 }))
-export default class MenuExampleInvertedSegment extends Component {
+export default class Navbar extends Component {
   constructor() {
       super();
 

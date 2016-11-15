@@ -7,19 +7,19 @@ import * as CampaignActions from '../actions/CampaignActions';
 import FeaturedResults from './FeaturedResults';
 
 @connect(state => ({
-  campaigns: state.campaigns
+  campaigns: state.campaigns,
 }), dispatch => ({
   fetchCampaigns() {
     dispatch(CampaignActions.fetchCampaigns());
   },
 }))
 export default class Home extends Component {
-  componentWillMount () {
-    this.props.fetchCampaigns()
+  componentWillMount() {
+    this.props.fetchCampaigns();
   }
 
-  render () {
-    let { campaigns } = this.props;
+  render() {
+    // let { campaigns } = this.props;
     return (
       <div>
         <div className='homeImageContainer'>

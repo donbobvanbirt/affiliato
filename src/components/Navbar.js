@@ -36,6 +36,7 @@ export default class Navbar extends Component {
   search = (e, formInput) => {
     e.preventDefault();
     let { query } = formInput;
+    console.log('query: ', query);
     console.log('serializedForm:', `/search/${encodeURI(query)}`);
     // call action to search(query);
     // |||||||||||||||||||||||||

@@ -3,6 +3,10 @@
   padding: 0px;
 }
 
+searchInputSegment {
+  margin: 0px !important;
+}
+
 .ui.cards>.card {
     font-size: 1em;
     left: 2%;
@@ -32,6 +36,20 @@
   .searchFilterContainer {
     padding-top: 0px;
     height: 320px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .ui.container {
+    width: 100% !important;
+    margin-left: auto !important;
+    /*margin-Right: auto !important;*/
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .advancedSearchButton {
+    width: 100%;
   }
 }
 
@@ -124,8 +142,6 @@ body {
 
 .homeMessage {
   position: absolute;
-  /*left: 150px;
-  top: 350px;*/
   top: 25%;
   left: 21%;
   right: 21%;
@@ -140,7 +156,3 @@ h2 span {
    padding: 10px;
    line-height: 2.5em;
 }
-
-/*.x {
-  line-height: 30px;
-}*/

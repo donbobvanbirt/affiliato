@@ -6,9 +6,6 @@ import * as CampaignActions from '../actions/CampaignActions';
 @connect(state => ({
   campaigns: state.campaigns,
 }), dispatch => ({
-  handler(data) {
-    dispatch(CampaignActions.createCampaign(data));
-  },
 }))
 
 export default class SearchResults extends Component {

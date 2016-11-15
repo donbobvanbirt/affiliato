@@ -4,17 +4,19 @@ import { Container, Button, Form ,Header, Icon} from "semantic-ui-react";
 import * as CampaignActions from '../actions/CampaignActions';
 import { browserHistory } from 'react-router';
 
+import { signInWithGoogle } from '../actions/auth';
+
+
 @connect(state => ({}), dispatch => ({
-  /*
-  login(user) {
-    dispatch(login(user));
+  googleSignIn() {
+    dispatch(signInWithGoogle());
   }
-  */
 }))
 export default class CampaignForm extends Component {
   submitLogin = (e, values) => {
     e.preventDefault();
     console.log('values:', values);
+    // action to check auth(values);
   }
   render() {
     return (
@@ -27,8 +29,15 @@ export default class CampaignForm extends Component {
           <Form onSubmit={this.submitLogin}>
             <Form.Input label="Username" name="username" placeholder="Username" />
             <Form.Input label="Password" name="password" placeholder="Password" type='password'/>
-            <Button fluid primary type="submit">Login</Button>
+            <Button fluid default type="submit">Login</Button>
           </Form>
+          <hr/>
+          <p class='text-center or'>OR</p>
+          <Button fluid primary onClick={() => {
+            this.props.googleSignIn();
+            browserHistory.push('/');
+          }
+        }><Icon name='google' size='large'></Icon>Sign In With Google</Button>
         </Container>
       </div>
     );

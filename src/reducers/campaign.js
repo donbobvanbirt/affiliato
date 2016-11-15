@@ -1,4 +1,3 @@
-
 export default function (state = {}, action) {
   switch (action.type) {
     case 'CAMPAIGN_CREATE':

@@ -4,12 +4,20 @@ const path = require('path');
 
 const User = require('../models/User');
 
+// FIND USER BY UID
+router.get('/uid/:uid', (req, res) => {
+  User.findOne({ uid: req.params.uid })
+  .then(user => res.send(user))
+  .catch(err => res.send(null));
+});
+
 // FIND USER BY ID
 router.get('/:id', (req, res) => {
-  User.find({ _id: req.params.id })
+  User.findById(req.params.id)
   .then(user => res.send(user))
-  .catch(err => res.status(400).send(err));
+  .catch(err => res.send());
 });
+
 
 // GET ALL USERS
 router.get('/', (req, res) => {

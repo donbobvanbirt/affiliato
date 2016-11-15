@@ -9,24 +9,58 @@ export function signInWithGoogle() {
 }
 
 function authenticate(provider) {
+  let resultHolder;
   return dispatch => {
     firebaseAuth.signInWithPopup(provider)
-      .then(result => dispatch(signInSuccess(result)))
+      .then(result => {
+        resultHolder = result;
+        console.log('resultHolder:', resultHolder);
+        let { uid } = result.user;
+        return axios.get(`/api/users/uid/${uid}`)
+      })
+      .then(user => {
+        if (user.data) {
+          console.log('user.data:', user.data);
+          return user.data;
+        } else {
+          let { email, displayName, photoURL, uid } = resultHolder.user;
+          let newUserObj = {
+            uid,
+            username: displayName,
+            email,
+            name: {
+              first: displayName.split(' ')[0],
+              last: displayName.split(' ')[1]
+            },
+            profilePic: photoURL
+          };
+          return axios.post(`/api/users`, newUserObj)
+        }
+      })
+      .then(dbUser => {
+        dispatch(signInSuccess(resultHolder, dbUser))
+      })
       .catch(err => dispatch(signInError(err)))
   }
 }
 
-function signInSuccess(result) {
+function signInSuccess(result, dbUser) {
   return {
     type: 'SIGN_IN_SUCCESS',
-    payload: result.user
+    payload: {
+      auth: result.user,
+      user: dbUser
+    }
   }
 }
 
-function initAuthSuccess(user) {
+function initAuthSuccess(user, dbUser) {
   return {
     type: 'INIT_AUTH_SUCCESS',
-    payload: user
+    payload: {
+      auth: user,
+      user: dbUser
+    }
   }
 }
 
@@ -44,6 +78,7 @@ function initAuthError(err) {
 }
 
 function signInError(err) {
+  console.log('err:', err);
   return {
     type: 'SIGN_IN_ERROR',
     payload: err
@@ -57,22 +92,57 @@ export function signOut() {
   }
 }
 
-export function initAuth(dispatch) {
-  return new Promise((resolve, reject) => {
+// function authenticate(provider) {
+//   let resultHolder;
+//   return dispatch => {
+//     firebaseAuth.signInWithPopup(provider)
+//       .then(result => {
+//         resultHolder = result;
+//         console.log('resultHolder:', resultHolder);
+//         let { uid } = result.user;
+//         return axios.get(`/api/users/uid/${uid}`)
+//       })
+//       .then(user => {
+//         if (user.data) {
+//           console.log('user.data:', user.data);
+//           return user.data;
+//         } else {
+//           let { email, displayName, photoURL, uid } = resultHolder.user;
+//           let newUserObj = {
+//             uid,
+//             username: displayName,
+//             email,
+//             name: {
+//               first: displayName.split(' ')[0],
+//               last: displayName.split(' ')[1]
+//             },
+//             profilePic: photoURL
+//           };
+//           return axios.post(`/api/users`, newUserObj)
+//         }
+//       })
+//       .then(dbUser => {
+//         dispatch(signInSuccess(resultHolder, dbUser))
+//       })
+//       .catch(err => dispatch(signInError(err)))
+//   }
+// }
 
-    // onAuthStateChanged returns a function that lets you unsub from it
+export function initAuth(dispatch) {
+  console.log('INITAUTH');
+  return new Promise((resolve, reject) => {
     const unsub = firebaseAuth.onAuthStateChanged(
       user => {
         if (user) {
-          dispatch(initAuthSuccess(user));
-          // makes this only happen one time
+          axios.get(`/api/users/uid/${user.uid}`)
+            .then(dbUser => {
+              dispatch(initAuthSuccess(user, dbUser.data));
+            })
         }
         unsub();
         resolve();
       },
       error => {
-        // dispatch(initAuthError(error));
-        // reject(error);
         resolve();
       }
     )

@@ -1,17 +1,21 @@
 const initialState = {
-  authenticated: false,
-  user: {}
+  username: undefined,
+  uid: undefined,
+  email: undefined,
+  name: {
+    first: undefined,
+    last: undefined
+  },
+  profilePic: undefined,
+  campaign: [undefined]
 }
 
 export default function(state = {}, { type, payload }) {
   switch (type) {
     case 'INIT_AUTH_SUCCESS':
     case 'SIGN_IN_SUCCESS':
-      let { uid, email, displayName, photoURL } = ( payload.auth || payload );
-      return Object.assign({}, state, {
-        authenticated: true,
-        user: { uid, email, displayName, photoURL }
-      })
+      let { user } = payload;
+      return Object.assign({}, state, user);
     case 'SIGN_OUT_SUCCESS':
       return initialState;
     default:

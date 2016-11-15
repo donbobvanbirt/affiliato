@@ -29,14 +29,15 @@ export default class CampaignForm extends Component {
           <Form onSubmit={this.submitLogin}>
             <Form.Input label="Username" name="username" placeholder="Username" />
             <Form.Input label="Password" name="password" placeholder="Password" type='password'/>
-            <Button fluid primary type="submit">Login</Button>
+            <Button fluid default type="submit">Login</Button>
           </Form>
-          <br/>
+          <hr/>
+          <p class='text-center or'>OR</p>
           <Button fluid primary onClick={() => {
             this.props.googleSignIn();
             browserHistory.push('/');
           }
-          }>Sign In With Google</Button>
+        }><Icon name='google' size='large'></Icon>Sign In With Google</Button>
         </Container>
       </div>
     );

@@ -1,10 +1,11 @@
+let initialState = {};
+
 export default function (state = {}, action) {
   switch (action.type) {
-    case 'CAMPAIGN_CREATE':
+    case 'RECEIVE_FILTERED_CAMPAIGNS':
       return action.payload;
-    case 'UPDATE_CAMPAIGN':
-    case 'SET_CURRENT_CAMPAIGN':
-      return action.payload;
+    case 'RESET_FILTERED_CAMPAIGNS':
+      return initialState;
     default:
       return state;
   }

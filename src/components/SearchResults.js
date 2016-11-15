@@ -1,78 +1,108 @@
 import React, { Component } from 'react';
 import { Card, Icon } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
-export default class SearchPage extends Component {
+import * as SearchActions from '../actions/SearchActions';
+
+@connect(state => ({
+  advSearchQuery: state.advSearchQuery,
+  campaigns: state.campaigns,
+  filteredCampaigns: state.filteredCampaigns,
+}), dispatch => ({
+  resetFilter () {
+    dispatch(SearchActions.resetFilteredCampaigns());
+  }
+}))
+
+// TODO Allow to search again with the Search NavBar
+// TODO ComponentWillMount include this.props.fetchCampaigns()
+// TODO add route for /search
+export default class SearchResults extends Component {
   constructor () {
     super();
     this.state = {};
     // this._grabSearchRequest = this._grabSearchRequest.bind(this);
   }
 
-  // _grabSearchRequest (e, { value }) {
-  //   this.setState({ value });
-  //   console.log('Sanity:');
+  componentWillMount () {
+    let { query, campaigns } = this.props;
+    console.log('query in Results: ', query);
+    console.log('campaigns: ', campaigns);
+    let navbarSearch = campaigns.filter((campaign) => {
+      if (campaign.title === query) {
+        console.log('Sanity:Caught Query');
+        return campaign;
+      }
+    });
+    console.log('navbarSearch: ', navbarSearch);
+    this.setState({
+      navbarSearch
+    });
+  }
+
+  componentWillUnmount () {
+    console.log('Sanity:unmounted');
+    this.props.resetFilter();
+  }
+
+// TODO Allow to search again with the Search NavBar
+  // componentDidUpdate () {
+  //   let { query, campaigns } = this.props;
+  //   console.log('query in Results: ', query);
+  //   console.log('campaigns: ', campaigns);
+  //   let navbarSearch = campaigns.filter((campaign) => {
+  //     if (campaign.title === query) {
+  //       console.log('Sanity:Caught Query');
+  //       return campaign;
+  //     }
+  //   });
+  //   console.log('navbarSearch: ', navbarSearch);
+  //   this.setState({
+  //     navbarSearch
+  //   })
   // }
 
   render () {
-    //  let { users } = this.props;
-    // let { campaigns } = users;
-    const campaigns = [
-      {
-        type: 'personal',
-        name: 'Elliot Baker',
-        _id: 1,
-        img: 'http://semantic-ui.com/images/avatar/large/elliot.jpg',
-        story: 'Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his cat.',
-        supporters: 162
-      },
-      {
-        type: 'cause',
-        name: 'Free California',
-        _id: 2,
-        img: 'http://semantic-ui.com/images/avatar/large/elliot.jpg',
-        story: 'Free California! California is a state that can flourish without the supervision of the government. Make California Great Again.',
-        supporters: 3842
-      },
-      {
-        type: 'organization',
-        name: 'San Francisco Zoo',
-        _id: 3,
-        img: 'http://semantic-ui.com/images/avatar/large/elliot.jpg',
-        story: 'The San Francisco Zoo on market street has been a steadfast landmark holding a great historical importance to this city. The costs to maintain the animals and wildlife near a couple of million dollars each month. We aim to keep our doors open free at no cost to the public.',
-        supporters: 20391
-      },
-      {
-        type: 'personal',
-        name: 'Teenage Jesus',
-        _id: 4,
-        img: 'http://semantic-ui.com/images/avatar/large/elliot.jpg',
-        story: 'Teenage Jesus can\'t afford his carpenting lessons.',
-        supporters: 55
-      }
-    ];
+    let { campaigns, advSearchQuery, filteredCampaigns } = this.props;
+    let { navbarSearch } = this.state;
+    // console.log('this.props: ', this.props);
+    // console.log('advSearchQuery: ', advSearchQuery);
+    // console.log('all campaigns: ', campaigns);
+    // console.log('navbarSearch: ', navbarSearch);
+    console.log('filteredCampaigns in SearchResults: ', filteredCampaigns);
+    let search;
+    filteredCampaigns.length ? search = filteredCampaigns : search = navbarSearch;
+    console.log('search: ', search);
+    let Campaigns = [];
+    if (campaigns.length) {
+      Campaigns =
+        search.map((campaign) => {
+        //  console.log('campaign: ', campaign);
+         return (
+           <Card key={campaign._id}
+             raised
+             image={campaign.assets.profile}
+             header={campaign.title}
+             meta={campaign.type}
+            //  onClick={this.directToCampaign.bind(this, campaign)}
+             description={campaign.description}
+             extra={(
+               <a>
+                 <Icon name='user' />
+                 {campaign.supporters.length}
+               </a>
+             )}
+           />
+         );
+       })
+    }
     return (
-      // <Card.Group itemsPerRow={4}>
-      <Card.Group>
-      {
-        campaigns.map((campaign) => {
-          return (
-            <Card key={campaign._id}
-              raised
-              image={campaign.img}
-              header={campaign.name}
-              meta={campaign.type}
-              description={campaign.story}
-              extra={(
-                <a>
-                  <Icon name='user' />
-                  {campaign.supporters}
-                </a>
-              )}
-            />
-          );
-        })
-      }
-      </Card.Group>
+      <div>
+        <Card.Group>
+          {Campaigns}
+        </Card.Group>
+      </div>
+
     );
   }
 }

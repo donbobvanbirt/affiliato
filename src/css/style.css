@@ -1,11 +1,11 @@
 
 .searchPage {
-  /*padding: 20px;*/
+  padding: 0px;
 }
 
 .ui.cards>.card {
     font-size: 1em;
-    left: 7%;
+    left: 2%;
     margin: 10px;
 }
 
@@ -77,6 +77,70 @@ body {
   color: white;
 }
 
+ HEAD
 .or {
   margin-top: -30px;
 }
+
+/*for the Card divs on the home page*/
+.ui.card>.image {
+  height: 14em;
+}
+
+.ui.cards>.card {
+  overflow: hidden;
+  height: 28em;
+}
+
+.ui.card>.content, .ui.cards>.card>.content {
+  overflow: auto;
+}
+
+.ui.cards {
+  margin-top: 25px;
+}
+
+.ui.card>.extra.content, .ui.cards>.card>.extra.content {
+  overflow: hidden;
+}
+
+/*for the Home Page splash image*/
+.homeImageContainer {
+  position: relative;
+  /*display:table-cell;*/
+  /*vertical-align:middle;*/
+  /*text-align:center;*/
+}
+
+.homeImage {
+  /*height: 50%;*/
+  height: 650px !important;
+  position: absolute;
+  /*max-width: 80% !important;*/
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.homeMessage {
+  position: absolute;
+  /*left: 150px;
+  top: 350px;*/
+  top: 25%;
+  left: 21%;
+  right: 21%;
+}
+
+h2 span {
+   color: white;
+   font: bold 24px/45px Helvetica, Sans-Serif;
+   letter-spacing: -1px;
+   background: rgb(0, 0, 0); /* fallback color */
+   background: rgba(0, 0, 0, 0.7);
+   padding: 10px;
+   line-height: 2.5em;
+}
+
+/*.x {
+  line-height: 30px;
+}*/

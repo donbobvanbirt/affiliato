@@ -9,10 +9,11 @@ import SearchPage from './SearchPage';
 export default class Layout extends Component {
   render () {
     return (
-       <div>
-         <Navbar />
-         {this.props.children}
-       </div>
+      <div>
+        <Navbar />
+        {this.props.children}
+      </div>
+
     );
   }
 }

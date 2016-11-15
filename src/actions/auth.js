@@ -112,14 +112,17 @@ export function initAuth(dispatch) {
           axios.get(`/api/users/uid/${user.uid}`)
             .then(dbUser => {
               dbUserHolder = dbUser.data;
-              if (dbUser.campaign.length) {
+              if (dbUser.campaign && dbUser.campaign.length) {
                 return axios.get(`/api/campaigns/${dbUser.data.campaign[0]}`)
               } else {
                 return null;
               }
             })
             .then(campaign => {
-              dispatch(initAuthSuccess(user, dbUserHolder, campaign.data[0]));
+              if (campaign) {
+                campaign = campaign.data[0];
+              }
+              dispatch(initAuthSuccess(user, dbUserHolder, campaign));
             })
         }
         unsub();

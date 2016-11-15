@@ -106,14 +106,15 @@ router.get('/', (req, res) => {
 
 // ADD NEW CAMPAIGN
 router.post('/', (req, res) => {
-  const { user } = req.body;
+  console.log('req.body:', req.body);
+  const { userId } = req.body;
   let addedCampaign;
-  Campaign.create(req.body)
+  Campaign.create(req.body.campaign)
   .then((newCampaign) => {
     const campaignId = newCampaign._id;
     addedCampaign = newCampaign;
     return User.findOneAndUpdate(
-      { _id: user },
+      { _id: userId },
       { $push: { campaign: campaignId } },
       { safe: true, upsert: true, new: true }
     );

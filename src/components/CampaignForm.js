@@ -1,20 +1,21 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { Container, Button, Form ,Header, Icon} from "semantic-ui-react";
-import * as CampaignActions from '../actions/CampaignActions';
+import { createCampaign } from '../actions/CampaignActions';
 import { browserHistory } from 'react-router';
 
 @connect(state => ({
   campaign: state.campaign,
+  userId: state.user._id,
 }), dispatch => ({
-  handler(data) {
-    dispatch(CampaignActions.createCampaign(data));
+  createCampaign(campaignObj) {
+    dispatch(createCampaign(campaignObj));
   },
 }))
 export default class CampaignForm extends Component {
   handleSubmit(e, values) {
     e.preventDefault();
-    let { handler } = this.props;
+    let { createCampaign, userId } = this.props;
     let { title, description, header, profile, storyImg, moneyExplain, amazonURL, about, terms } = values;
     let campaignObj = {
       title,
@@ -32,7 +33,7 @@ export default class CampaignForm extends Component {
         profile
       }
     }
-    handler(campaignObj);
+    createCampaign(campaignObj, userId);
     browserHistory.push('/campaignProfile');
   }
   render() {

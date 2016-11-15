@@ -106,10 +106,9 @@ router.get('/', (req, res) => {
 
 // ADD NEW CAMPAIGN
 router.post('/', (req, res) => {
-  console.log('req.body:', req.body);
-  const { userId } = req.body;
+  let userId = req.headers['x-user'];
   let addedCampaign;
-  Campaign.create(req.body.campaign)
+  Campaign.create(req.body)
   .then((newCampaign) => {
     const campaignId = newCampaign._id;
     addedCampaign = newCampaign;
@@ -120,7 +119,9 @@ router.post('/', (req, res) => {
     );
   })
   .then(() => res.send(addedCampaign))
-  .catch(err => res.status(400).send(err));
+  .catch(err => {
+    res.status(400).send(err)
+  });
 });
 
 module.exports = router;

@@ -8,8 +8,8 @@ import { browserHistory } from 'react-router';
   campaign: state.campaign,
   userId: state.user._id,
 }), dispatch => ({
-  createCampaign(campaignObj) {
-    dispatch(createCampaign(campaignObj));
+  createCampaign(campaignObj, userId) {
+    dispatch(createCampaign(campaignObj, userId));
   },
 }))
 export default class CampaignForm extends Component {

@@ -10,17 +10,16 @@ export function signInWithGoogle() {
 
 function authenticate(provider) {
   let resultHolder;
+  let dbUserHolder;
   return dispatch => {
     firebaseAuth.signInWithPopup(provider)
       .then(result => {
         resultHolder = result;
-        console.log('resultHolder:', resultHolder);
         let { uid } = result.user;
         return axios.get(`/api/users/uid/${uid}`)
       })
       .then(user => {
         if (user.data) {
-          console.log('user.data:', user.data);
           return user.data;
         } else {
           let { email, displayName, photoURL, uid } = resultHolder.user;
@@ -38,28 +37,41 @@ function authenticate(provider) {
         }
       })
       .then(dbUser => {
-        dispatch(signInSuccess(resultHolder, dbUser))
+        dbUserHolder = dbUser;
+        if (dbUser.campaign.length) {
+          return axios.get(`/api/campaigns/${dbUser.campaign[0]}`)
+        } else {
+          return null;
+        }
+      })
+      .then(campaign => {
+        if (campaign) {
+          campaign = campaign.data[0];
+        }
+        dispatch(signInSuccess(resultHolder, dbUserHolder, campaign))
       })
       .catch(err => dispatch(signInError(err)))
   }
 }
 
-function signInSuccess(result, dbUser) {
+function signInSuccess(result, dbUser, campaign) {
   return {
     type: 'SIGN_IN_SUCCESS',
     payload: {
       auth: result.user,
-      user: dbUser
+      user: dbUser,
+      campaign
     }
   }
 }
 
-function initAuthSuccess(user, dbUser) {
+function initAuthSuccess(user, dbUser, campaign) {
   return {
     type: 'INIT_AUTH_SUCCESS',
     payload: {
       auth: user,
-      user: dbUser
+      user: dbUser,
+      campaign
     }
   }
 }
@@ -78,7 +90,6 @@ function initAuthError(err) {
 }
 
 function signInError(err) {
-  console.log('err:', err);
   return {
     type: 'SIGN_IN_ERROR',
     payload: err
@@ -92,51 +103,23 @@ export function signOut() {
   }
 }
 
-// function authenticate(provider) {
-//   let resultHolder;
-//   return dispatch => {
-//     firebaseAuth.signInWithPopup(provider)
-//       .then(result => {
-//         resultHolder = result;
-//         console.log('resultHolder:', resultHolder);
-//         let { uid } = result.user;
-//         return axios.get(`/api/users/uid/${uid}`)
-//       })
-//       .then(user => {
-//         if (user.data) {
-//           console.log('user.data:', user.data);
-//           return user.data;
-//         } else {
-//           let { email, displayName, photoURL, uid } = resultHolder.user;
-//           let newUserObj = {
-//             uid,
-//             username: displayName,
-//             email,
-//             name: {
-//               first: displayName.split(' ')[0],
-//               last: displayName.split(' ')[1]
-//             },
-//             profilePic: photoURL
-//           };
-//           return axios.post(`/api/users`, newUserObj)
-//         }
-//       })
-//       .then(dbUser => {
-//         dispatch(signInSuccess(resultHolder, dbUser))
-//       })
-//       .catch(err => dispatch(signInError(err)))
-//   }
-// }
-
 export function initAuth(dispatch) {
-  console.log('INITAUTH');
   return new Promise((resolve, reject) => {
     const unsub = firebaseAuth.onAuthStateChanged(
       user => {
         if (user) {
+          let dbUserHolder;
           axios.get(`/api/users/uid/${user.uid}`)
             .then(dbUser => {
-              dispatch(initAuthSuccess(user, dbUser.data));
+              dbUserHolder = dbUser.data;
+              if (dbUser.campaign.length) {
+                return axios.get(`/api/campaigns/${dbUser.data.campaign[0]}`)
+              } else {
+                return null;
+              }
+            })
+            .then(campaign => {
+              dispatch(initAuthSuccess(user, dbUserHolder, campaign.data[0]));
             })
         }
         unsub();
@@ -153,7 +136,6 @@ export function initAuth(dispatch) {
 export function checkProtectedRoute() {
   firebaseAuth.currentUser.getToken()
     .then(token => {
-      console.log('token:', token);
       return axios.get('/api/secret', {
         headers: {
           'x-auth-token': token
@@ -161,7 +143,6 @@ export function checkProtectedRoute() {
       })
     })
     .then(res => {
-      console.log('res:', res);
       return res.data;
     })
     .then(data=> data)

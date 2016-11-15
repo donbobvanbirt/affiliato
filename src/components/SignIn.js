@@ -5,8 +5,8 @@ import { signInWithGoogle, signOut } from '../actions/auth';
 
 
 @connect(state => ({
-  loggedIn: state.auth.authenticated,
-  user: state.auth.user
+  loggedIn: !!state.user._id,
+  user: state.user
 }), dispatch => ({
   signOut() {
     dispatch(signOut());

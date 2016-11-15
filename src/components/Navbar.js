@@ -6,8 +6,8 @@ import { Menu, Segment, Input, Form } from 'semantic-ui-react';
 import { signOut } from '../actions/auth';
 
 @connect(state=> ({
-  loggedIn: state.auth.authenticated,
-  user: state.auth.user
+  loggedIn: !!state.user._id,
+  user: state.user
 }), dispatch => ({
   signOut() {
     dispatch(signOut());
@@ -18,7 +18,7 @@ import { signOut } from '../actions/auth';
   }
   */
 }))
-export default class MenuExampleInvertedSegment extends Component {
+export default class Navbar extends Component {
   constructor() {
       super();
 

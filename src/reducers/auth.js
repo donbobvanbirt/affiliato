@@ -8,7 +8,7 @@ export default function(state = {}, { type, payload }) {
     case 'INIT_AUTH_SUCCESS':
     case 'SIGN_IN_SUCCESS':
       let { uid, email, displayName, photoURL } = ( payload.auth || payload );
-      return Object.assign({}, state, {
+      return Object.assign({}, {
         authenticated: true,
         user: { uid, email, displayName, photoURL }
       })

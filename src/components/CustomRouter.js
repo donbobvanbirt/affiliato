@@ -14,7 +14,6 @@ import SignIn from './SignIn';
 import Secret from './Secret';
 
 function authCheck(nextState, transition) {
-  console.log('nextState:', nextState);
   let user = firebaseAuth.currentUser;
   if (!user) {
     transition('/login');

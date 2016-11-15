@@ -8,28 +8,12 @@ export function createCampaignSuccess(data) {
 }
 
 export function createCampaign(campaign, userId){
-  console.log('campaign:', campaign);
-  let body = { campaign, userId };
   return (dispatch) => {
-    axios.post(`/api/campaigns/`, body)
+    axios.post(`/api/campaigns/`, campaign, {
+      headers: { 'x-user': userId }
+    })
     .then(res => res.data)
     .then(newCampaign => dispatch(createCampaignSuccess(newCampaign)))
     .catch(console.error);
   };
 }
-
-
-// { campaign: {
-//   title: 'aaaaab',
-//   description: 'gyft',
-//   about: 'jcghkvjlbn',
-//   moneyExplain: ';ohugyftcgjhvj',
-//   affiliates: [ [Object] ],
-//   assets: {
-//     header: 'tcfyvubi',
-//     storyImg: 'bigyucfxnm bhj.k',
-//     profile: 'ytdrx'
-//   }
-// }
-//
-// }

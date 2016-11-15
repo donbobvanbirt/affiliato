@@ -60,7 +60,7 @@ export function addedClick(data){
 
 // export function createCampaign(data) {
 //   return (dispatch) => {
-//     axios.post('/api/campaign/', data)
+//     axios.post('/api/campaigns/', data)
 //       .then(res => res.data)
 //       .then(data2 => dispatch(retrieveCreatedCampaign(data2)))
 //       .catch(console.error);
@@ -69,7 +69,7 @@ export function addedClick(data){
 
 export function fetchCampaigns() {
   return (dispatch) => {
-    axios.get('/api/campaign/')
+    axios.get('/api/campaigns/')
     .then(res => res.data)
     .then(campaigns => dispatch(receiveCampaigns(campaigns)))
     .catch(console.error);
@@ -78,7 +78,7 @@ export function fetchCampaigns() {
 
 export function submitPost(post, camp) {
   return (dispatch) => {
-    axios.post(`/api/campaign/post/${camp}`, post)
+    axios.post(`/api/campaigns/post/${camp}`, post)
     .then(res => res.data)
     .then(data2 => dispatch(addedPost(data2)))
     .catch(console.error);
@@ -88,7 +88,7 @@ export function submitPost(post, camp) {
 
 export function getCampaign(id) {
   return (dispatch) => {
-    axios.get(`/api/campaign/${id}`)
+    axios.get(`/api/campaigns/${id}`)
     .then(res => res.data)
     .then(data2 => dispatch(setCurrentCampaign(data2)))
     .catch(console.error);
@@ -97,7 +97,7 @@ export function getCampaign(id) {
 
 export function addClick(campaign) {
   return (dispatch) => {
-    axios.put(`/api/campaign/${campaign._id}`, campaign)
+    axios.put(`/api/campaigns/${campaign._id}`, campaign)
     .then(res => res.data)
     .then(res2 => dispatch(addedClick(res2)))
   };

@@ -66,6 +66,7 @@ function signInSuccess(result, dbUser, campaign) {
 }
 
 function initAuthSuccess(user, dbUser, campaign) {
+  console.log('initAuthSuccess campaign:', campaign);
   return {
     type: 'INIT_AUTH_SUCCESS',
     payload: {
@@ -111,7 +112,8 @@ export function initAuth(dispatch) {
           let dbUserHolder;
           axios.get(`/api/users/uid/${user.uid}`)
             .then(dbUser => {
-              dbUserHolder = dbUser.data;
+              dbUser = dbUser.data;
+              dbUserHolder = dbUser;
               if (dbUser.campaign && dbUser.campaign.length) {
                 return axios.get(`/api/campaigns/${dbUser.data.campaign[0]}`)
               } else {

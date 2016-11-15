@@ -25,7 +25,8 @@ export default class ClientPage extends Component {
     let who;
     let money;
     let amazonLink;
-    let amazon = campaign.affiliates[0];
+    // let amazon = campaign.affiliates[0];
+    let amazon;
     if(amazon) {
       amazonLink = amazon.url
     }

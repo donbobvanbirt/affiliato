@@ -70,7 +70,7 @@ class Dashboard extends Component {
               return (
                 <List.Item key={i}>
                   <List.Icon name='linkify' />
-                  <List.Content content={<a href={url}>{site}</a>} />
+                  <List.Content content={<a href={url} target="_blank" rel="noopener noreferrer">{site}</a>} />
                   <List.Description><Icon name="mouse pointer" /> {clicks} clicks</List.Description>
                 </List.Item>
               )

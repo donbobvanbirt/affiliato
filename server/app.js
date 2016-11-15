@@ -7,8 +7,8 @@ const morgan = require('morgan');
 const path = require('path');
 const mongoose = require('mongoose');
 
-// const MONGODB_URI = 'mongodb://johnsalay:Elbrus123@ds061246.mlab.com:61246/johndb';
-const MONGODB_URI = 'mongodb://localhost/affiliatodb';
+const MONGODB_URI = 'mongodb://johnsalay:Elbrus123@ds061246.mlab.com:61246/johndb';
+// const MONGODB_URI = 'mongodb://localhost/affiliatodb';
 
 // MONGOOSE CONFIGURATION
 mongoose.Promise = Promise;

@@ -5,7 +5,7 @@ import moment from 'moment';
 
 import { submitPost, getCampaign } from '../actions/CampaignActions';
 
-const camp = '582a0dd9c28eb63519734218';
+const camp = '582b60730a42a51c2464696e';
 
 class Dashboard extends Component {
   constructor() {

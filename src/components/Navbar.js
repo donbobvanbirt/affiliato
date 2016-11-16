@@ -58,6 +58,10 @@ export default class Navbar extends Component {
             <Menu.Item name='Create New Campaign' active={active === 'createNewCamp'} onClick={() => {
               this.handleItemClick('createNewCamp', '/createNewCampaign');
               }} />
+              <Menu.Item className='navbarLogo'>
+                  <img src='assets/images/affiliatoLogoTransparent.png' />
+              {/* <Menu.Item src='../../public/assets/images/affiliatoLogo.png' /> */}
+              </Menu.Item>
               <Menu.Menu position='right'>
 
                 <Menu.Item>

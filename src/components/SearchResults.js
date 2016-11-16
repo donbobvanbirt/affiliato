@@ -96,14 +96,15 @@ export default class SearchResults extends Component {
              )}
            />
          );
-       })
+      })
     }
     return (
-      <div>
+      <Container fluid>
+
         <Card.Group>
           {Campaigns}
         </Card.Group>
-      </div>
+      </Container>
 
     );
   }

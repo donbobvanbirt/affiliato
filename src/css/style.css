@@ -156,3 +156,19 @@ h2 span {
    padding: 10px;
    line-height: 2.5em;
 }
+
+.ui.secondary.menu .item>img:not(.ui) {
+  height: 50px;
+  width: 191px;
+}
+
+.navbarLogo {
+  position: absolute !important;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/*div.segment> div.mainNav.menu {*/
+.ui.secondary.inverted.menu {
+  position: relative !important;
+}

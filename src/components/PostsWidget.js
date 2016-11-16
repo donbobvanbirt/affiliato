@@ -12,13 +12,13 @@ const PostsWidget = (props) => (
   <Container>
     {console.log('props:', props)}
 
-    <Image src={props.campaign.assets.profile} shape="circular"/>
-    {props.posts.map((cur, i) => <Card key={i}
+    <Image src={props.campaign.assets ? props.campaign.assets.profile : ''} shape="circular"/>
+    {props.campaign.posts.map((cur, i) => <Card key={i}
       header={cur.title}
       description={cur.body}
       extra={extra(cur)}
       fluid
-                              />)}
+                                          />)}
 
   </Container>
   )

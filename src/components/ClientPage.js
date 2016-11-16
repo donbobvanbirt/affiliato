@@ -41,6 +41,7 @@ export default class ClientPage extends Component {
     let linkClicks = 0;
     let campTitle;
     let campDescription;
+    let postWidget;
 
     if (campaign) {
       const amazon = campaign.affiliates[0];
@@ -50,6 +51,7 @@ export default class ClientPage extends Component {
       linkClicks = campaign.affiliates[0].clicks;
       campTitle = campaign.title;
       campDescription = campaign.description;
+      postWidget = <PostsWidget campaign={campaign} />;
       if (amazon) {
         amazonLink = amazon.url;
       }
@@ -110,8 +112,7 @@ export default class ClientPage extends Component {
                 <Header as='h2' attached='top'>
                   Recent Posts
                 </Header>
-
-                <PostsWidget campaign={campaign} />
+                {postWidget}
 
               </Container>
             </Grid.Column>

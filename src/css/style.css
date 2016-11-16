@@ -156,3 +156,7 @@ h2 span {
    padding: 10px;
    line-height: 2.5em;
 }
+
+.profileImg {
+  margin: 0 auto !important;  
+}

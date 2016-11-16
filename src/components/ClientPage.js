@@ -26,8 +26,7 @@ export default class ClientPage extends Component {
     let who;
     let money;
     let amazonLink;
-    // let amazon = campaign.affiliates[0];
-    let amazon;
+    let amazon = campaign.affiliates[0];
     if(amazon) {
       amazonLink = amazon.url
     }
@@ -61,7 +60,7 @@ export default class ClientPage extends Component {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column textAlign="center" width={3}>
-              <Image src={campaign.assets ? campaign.assets.profile : ''} shape="circular"/>
+              <Image className='profileImg' src={campaign.assets ? campaign.assets.profile : ''} shape="circular"/>
               <Statistic>
                 <Value value={campaign.affiliates[0].clicks} />
                 <Label label='Clicks' />
@@ -84,7 +83,7 @@ export default class ClientPage extends Component {
                   Recent Posts
                 </Header>
 
-                <PostsWidget posts={campaign.posts} profile={campaign.assets.profile} />
+                <PostsWidget posts={campaign.posts} campaign={campaign} />
 
               </Container>
             </Grid.Column>

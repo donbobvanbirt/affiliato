@@ -1,26 +1,26 @@
 import React from 'react'
 import { Card, Icon, Container, Image } from 'semantic-ui-react'
 
-const extra = (
+const extra = (props) => (
   <a>
     <Icon name='comment outline' />
-    Nov. 18th 3:40pm
+    {props.timestamp}
   </a>
-)
+);
 
 const PostsWidget = (props) => (
   <Container>
     {console.log('props:', props)}
 
-    <Image src={props.profile} shape="circular"/>
-    <Card
-      header='Elliot Baker'
-      meta='Save our Trees'
-      description='This will be actual post.'
-      extra={extra}
+    <Image src={props.campaign.assets.profile} shape="circular"/>
+    {props.posts.map((cur, i) => <Card key={i}
+      header={cur.title}
+      description={cur.body}
+      extra={extra(cur)}
       fluid
-    />
-  </Container>
-)
+                              />)}
 
-export default PostsWidget;
+  </Container>
+  )
+
+  export default PostsWidget;

@@ -19,9 +19,7 @@ export default class FeaturedResults extends Component {
   // }
 
   directToCampaign(id) {
-    // console.log('campaign: ', campaign);
-    this.props.setCampaign(id);
-    browserHistory.push('/campaignProfile');
+    browserHistory.push(`/campaignProfile/${id}`);
   }
 
   render () {

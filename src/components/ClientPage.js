@@ -9,6 +9,9 @@ import * as CampaignActions from '../actions/CampaignActions';
   trackClick(campaign) {
     dispatch(CampaignActions.addClick(campaign));
   },
+  setCampaign(campaign) {
+    dispatch(CampaignActions.getCampaign(campaign));
+  },
 }))
 
 export default class ClientPage extends Component {
@@ -17,6 +20,11 @@ export default class ClientPage extends Component {
     let { campaign, trackClick } = this.props;
     campaign.affiliates[0].clicks++;
     trackClick(campaign);
+  }
+
+  componentWillMount() {
+    let { id } = this.props.params;
+    this.props.setCampaign(id);
   }
 
   render() {

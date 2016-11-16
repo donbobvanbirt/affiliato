@@ -111,7 +111,7 @@ export default class ClientPage extends Component {
                   Recent Posts
                 </Header>
 
-                <PostsWidget posts={campaign.posts} profile={campaign.assets.profile} />
+                <PostsWidget />
 
               </Container>
             </Grid.Column>

@@ -158,5 +158,16 @@ h2 span {
 }
 
 .profileImg {
-  margin: 0 auto !important;  
+  margin: 0 auto !important;
+}
+
+.paddingzero {
+  padding: 0px !important;
+}
+
+.marginzero {
+  margin: 0 auto !important;
+}
+.whitebg {
+  background-color: white !important;
 }

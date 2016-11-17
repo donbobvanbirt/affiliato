@@ -19,6 +19,7 @@ export default class Home extends Component {
   }
 
   render() {
+
     // let { campaigns } = this.props;
     return (
       <div>

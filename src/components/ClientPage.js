@@ -81,22 +81,22 @@ export default class ClientPage extends Component {
       }
     }
     return (
-      <Container className="campaign-form">
+      <Container className="paddingzero">
         <Grid celled="internally">
           <Grid.Row>
-            <Grid.Column width={16}>
+            <Grid.Column className='paddingzero' width={16}>
               <Image src={headerImg} height="1px" fluid />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
             <Grid.Column textAlign="center" width={3}>
-              <Image src={profileImg} shape="circular" />
+              <Image src={profileImg} className="marginzero" shape="circular" />
               <Statistic>
                 <Value value={linkClicks} />
                 <Label label="Clicks" />
               </Statistic>
             </Grid.Column>
-            <Grid.Column width={8}>
+            <Grid.Column width={8} className='whitebg'>
               <Container>
                 <Image src={storyPic} />
                 <Header as="h2" attached="top">

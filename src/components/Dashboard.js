@@ -78,9 +78,21 @@ class Dashboard extends Component {
             <Grid.Column width={3}>
               <Image src={profilePic} fluid />
               <Header as="h2">{title}</Header>
+
             </Grid.Column>
             <Grid.Column width={10}>
               <Image src={storyImg} fluid />
+              <Header as="h2">Add Post:</Header>
+              <Form onSubmit={this.submitForm}>
+                <Form.Group widths="equal">
+                  <Form.Field control={Input} label="Title" name="title" onChange={this.handleChange} placeholder="Title" />
+                </Form.Group>
+                <Form.Field control={TextArea} label="body" name="body" onChange={this.handleChange} placeholder="Start typing..." />
+                <Form.Field control={Button}>Submit</Form.Field>
+              </Form>
+
+              <Header as="h2">Your Posts:</Header>
+              {postFeed}
             </Grid.Column>
             <Grid.Column width={3}>
               <Header as="h2">Your Affiliate Links:</Header>
@@ -90,17 +102,7 @@ class Dashboard extends Component {
           </Grid.Row>
         </Grid>
 
-        <Header as="h2">Add Post:</Header>
-        <Form onSubmit={this.submitForm}>
-          <Form.Group widths="equal">
-            <Form.Field control={Input} label="Title" name="title" onChange={this.handleChange} placeholder="Title" />
-          </Form.Group>
-          <Form.Field control={TextArea} label="body" name="body" onChange={this.handleChange} placeholder="Start typing..." />
-          <Form.Field control={Button}>Submit</Form.Field>
-        </Form>
 
-        <Header as="h2">Your Posts:</Header>
-        {postFeed}
       </Container>
     );
   }

@@ -1,9 +1,7 @@
 
 export default function (state = {}, { type, payload }) {
   switch (type) {
-    case 'CAMPAIGN_CREATE':
-    case 'UPDATE_CAMPAIGN':
-      return action.payload;
+    case 'DELETED_CAPAIGN':
     case 'SIGN_OUT_SUCCESS':
       return {};
     case 'CAMPAIGN_CREATE':

@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
 import { Form, Input, TextArea, Button, Container, Header, Feed, Grid, Image, List, Icon, Modal } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import moment from 'moment';
 
 import PostsWidget from './PostsWidget';
-import { submitPost, getCampaign, editCampaign } from '../actions/CampaignActions';
+import { submitPost, getCampaign, editCampaign, removeCampaign } from '../actions/CampaignActions';
 
 let camp;
 
 class Dashboard extends Component {
   constructor() {
     super();
-    this.state = { open: false };
+    this.state = { open: false, deleteOpen: false };
   }
-
   submitForm = (e) => {
     e.preventDefault();
     this.props.addPost(this.state, camp);
   }
-
   submitEditForm = (e, values) => {
     e.preventDefault();
     let { editCamp, campaign } = this.props;
@@ -44,6 +43,10 @@ class Dashboard extends Component {
     this.setState({ open: false });
   }
 
+  preview = () => {
+    browserHistory.push(`campaignProfile/${this.props.campaign._id}`);
+  }
+
   handleChange = (e) => {
     const { name, value } = e.target;
     this.setState({
@@ -55,9 +58,19 @@ class Dashboard extends Component {
 
   hide = () => this.setState({ open: false })
 
+  deleteModalShow = () => this.setState({ deleteOpen: true })
+
+  hideDelete = () => this.setState({ deleteOpen: false })
+
+  deleteCampaign = () => {
+    let { removeCamp, campaign } = this.props;
+    removeCamp(campaign._id);
+    browserHistory.push('/');
+  }
+
   render() {
     const campObj = this.props.campaign;
-    const { open } = this.state;
+    const { open, deleteOpen } = this.state;
 
     let header;
     let profilePic;
@@ -117,7 +130,10 @@ class Dashboard extends Component {
             <Grid.Column width={3}>
               <Image src={profilePic} fluid />
               <Header as="h2">{title}</Header>
-              <Button onClick={this.show} primary>Edit Campaign</Button>
+              <Button basic onClick={this.preview} color="blue"><Icon name="mouse pointer" />Preview</Button>
+              <Button basic onClick={this.show} color="green"><Icon name="edit" />Edit</Button>
+              <hr />
+              <Button basic onClick={this.deleteModalShow} color="red"><Icon name="remove" />Delete</Button>
             </Grid.Column>
             <Grid.Column width={10}>
               <Image src={storyImg} fluid />
@@ -152,7 +168,7 @@ class Dashboard extends Component {
             <Modal.Header>Edit {title}</Modal.Header>
             <Modal.Content>
 
-              <Form onSubmit={this.submitEditForm} size='big'>
+              <Form onSubmit={this.submitEditForm} size="big">
                 <Form.Group widths="equal">
                   <Form.Input label="Name" name="title" defaultValue={title} placeholder="Campaign Name" />
                   <Form.Input label="Profile Picture" defaultValue={profilePic} name="profile" placeholder="Link to Profile Pic" />
@@ -176,6 +192,19 @@ class Dashboard extends Component {
           </Modal>
         </div>
 
+        <div>
+          <Modal basic size="small" open={deleteOpen}>
+            <Header icon="warning" content="Delete this campaign?" />
+            <Modal.Content>
+              <p>Your campaign and its content cannot be recovered once deleted!</p>
+            </Modal.Content>
+            <Modal.Actions>
+              <Button onClick={this.hideDelete} floated="left" color="green" inverted><Icon name="checkmark" /> Cancel</Button>
+              <Button onClick={this.deleteCampaign} basic floated="left" color="red" inverted><Icon name="remove" /> Delete</Button>
+            </Modal.Actions>
+          </Modal>
+        </div>
+
       </Container>
     );
   }
@@ -192,6 +221,9 @@ const mapDispatchToProps = dispatch => ({
   },
   editCamp(campaign, id) {
     dispatch(editCampaign(campaign, id));
+  },
+  removeCamp(campaign) {
+    dispatch(removeCampaign(campaign));
   },
 });
 

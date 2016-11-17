@@ -7,10 +7,10 @@ export function createCampaignSuccess(data) {
   };
 }
 
-export function createCampaign(campaign, userId){
+export function createCampaign(campaign, userId) {
   return (dispatch) => {
     axios.post(`/api/campaigns/`, campaign, {
-      headers: { 'x-user': userId }
+      headers: { 'x-user': userId },
     })
     .then(res => res.data)
     .then(newCampaign => dispatch(createCampaignSuccess(newCampaign)))
@@ -18,7 +18,6 @@ export function createCampaign(campaign, userId){
   };
 }
 
-///
 export function receiveCampaigns(campaigns) {
   console.log('campaigns:', campaigns);
   return {
@@ -51,11 +50,18 @@ export function receiveCampaign(data) {
   };
 }
 
-export function editedCamp(data){
+export function editedCamp(data) {
   return {
     type: 'UPDATE_CAMPAIGN',
-    payload: data
-  }
+    payload: data,
+  };
+}
+
+export function deletedCampaign(data) {
+  return {
+    type: 'DELETED_CAPAIGN',
+    payload: data,
+  };
 }
 
 // export function createCampaign(data) {
@@ -84,7 +90,6 @@ export function submitPost(post, camp) {
     .catch(console.error);
   };
 }
-///
 
 export function getCampaign(id) {
   return (dispatch) => {
@@ -100,6 +105,7 @@ export function addClick(campaign) {
     axios.put(`/api/campaigns/${campaign._id}`, campaign)
     .then(res => res.data)
     .then(res2 => dispatch(editedCamp(res2)))
+    .catch(console.error);
   };
 }
 
@@ -108,5 +114,15 @@ export function editCampaign(campaign, id) {
     axios.put(`/api/campaigns/${id}`, campaign)
     .then(res => res.data)
     .then(res2 => dispatch(editedCamp(res2)))
+    .catch(console.error);
+  };
+}
+
+export function removeCampaign(id) {
+  return (dispatch) => {
+    axios.delete(`/api/campaigns/${id}`)
+    .then(res => dispatch(deletedCampaign(res.data)))
+    // .then(fetchCampaigns())
+    .catch(console.error);
   };
 }

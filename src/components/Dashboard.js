@@ -28,7 +28,6 @@ class Dashboard extends Component {
 
   render() {
     const campObj = this.props.campaign;
-    camp = campObj._id;
 
     let header;
     let profilePic;
@@ -36,6 +35,10 @@ class Dashboard extends Component {
     let title;
     let affiliateList = 'You do not yet have any affiliates';
     let postFeed = 'You do not yet have any posts';
+
+    if (campObj) {
+      camp = campObj._id;
+    }
 
     if (campObj.posts) {
       // posts = campObj.posts.reverse();

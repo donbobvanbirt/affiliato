@@ -29,8 +29,7 @@ class Dashboard extends Component {
   render() {
     const campObj = this.props.campaign;
     camp = campObj._id;
-    console.log('campObj:', campObj);
-    // let posts;
+
     let header;
     let profilePic;
     let storyImg;

@@ -11,7 +11,7 @@ const extra = props => (
 const PostsWidget = props => (
   <Container>
 
-    {props.campaign.posts.map((cur, i) =>
+    {props.campaign.posts.reverse().map((cur, i) =>
       <Card
         key={i}
         header={cur.title}

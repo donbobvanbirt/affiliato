@@ -112,7 +112,7 @@ export default class ClientPage extends Component {
                 <Header as='h2' attached='top'>
                   Recent Posts
                 </Header>
-                {postWidget}
+                {/* {postWidget} */}
               </Container>
             </Grid.Column>
             <Grid.Column width={5}>

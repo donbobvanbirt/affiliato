@@ -46,7 +46,7 @@ export default class CampaignForm extends Component {
             Include compelling images and descriptions of your story.
           </Header.Subheader>
         </Header>
-        <Form onSubmit={() => this.handleSubmit()} size="big">
+        <Form onSubmit={this.handleSubmit} size="big">
           <Form.Group widths="equal">
             <Form.Input label="Name" name="title" placeholder="Campaign Name" />
             <Form.Input label="Profile Picture" name="profile" placeholder="Link to Profile Pic" />

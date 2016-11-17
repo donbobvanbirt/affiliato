@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Form, Input, TextArea, Button, Container, Header, Feed, Grid, Image, List, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+
+import PostsWidget from './PostsWidget';
 import { submitPost, getCampaign } from '../actions/CampaignActions';
 
 let camp;
@@ -43,21 +45,7 @@ class Dashboard extends Component {
       storyImg = campObj.assets.storyImg;
       title = campObj.title;
       postFeed = (
-        <Feed>
-          {posts.map((post, i) => {
-            const { title, body, timestamp } = post;
-            return (
-              <Feed.Event
-                key={i}
-                icon="pencil"
-                date={moment(timestamp).format('dddd MMM Do')}
-                summary={title}
-                extraText={body}
-              />
-            );
-          })}
-
-        </Feed>
+        <PostsWidget campaign={campObj} />
       );
       if (campObj.affiliates.length) {
         affiliateList = (

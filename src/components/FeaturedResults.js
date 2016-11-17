@@ -8,8 +8,8 @@ import { connect } from 'react-redux';
 @connect(state => ({
   campaigns: state.campaigns
 }), dispatch => ({
-  setCurrentCampaign(campaign) {
-    dispatch(CampaignActions.setCurrentCampaign(campaign));
+  setCampaign(campaign) {
+    dispatch(CampaignActions.getCampaign(campaign));
   },
 }))
 export default class FeaturedResults extends Component {
@@ -18,10 +18,8 @@ export default class FeaturedResults extends Component {
   //   console.log('nextProps: ', nextProps);
   // }
 
-  directToCampaign (campaign) {
-    console.log('campaign: ', campaign);
-    this.props.setCurrentCampaign(campaign);
-    browserHistory.push('/campaignProfile');
+  directToCampaign(id) {
+    browserHistory.push(`/campaignProfile/${id}`);
   }
 
   render () {
@@ -39,7 +37,8 @@ export default class FeaturedResults extends Component {
              image={campaign.assets.profile}
              header={campaign.title}
              meta={campaign.type}
-             onClick={this.directToCampaign.bind(this, campaign)}
+             onClick={() => this.directToCampaign(campaign._id)}
+            //  onClick={this.directToCampaign.bind(this, campaign)}
              description={campaign.description}
              extra={(
                <a>

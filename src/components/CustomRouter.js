@@ -28,7 +28,7 @@ export default class CustomRouter extends Component {
         <Route path='/' component={Layout}>
         <IndexRoute component={Home} />
           <Route path='/createNewCampaign' component={CampaignForm} onEnter={authCheck}/>
-          <Route path='/campaignProfile' component={ClientPage} />
+          <Route path='/campaignProfile/:id' component={ClientPage} />
           <Route path='/search/:query' component={SearchPage} />
           <Route path='/search' component={SearchPage} />
           <Route path='/login' component={Login} />

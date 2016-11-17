@@ -3,18 +3,15 @@ import { Form, Input, TextArea, Button, Container, Header, Feed, Grid, Image, Li
 import { connect } from 'react-redux';
 import moment from 'moment';
 
+import PostsWidget from './PostsWidget';
 import { submitPost, getCampaign } from '../actions/CampaignActions';
 
-const camp = '582a0dd9c28eb63519734218';
+let camp;
 
 class Dashboard extends Component {
   constructor() {
     super();
     this.state = {};
-  }
-
-  componentWillMount() {
-    this.props.getCamp(camp);
   }
 
   submitForm = (e) => {
@@ -30,8 +27,9 @@ class Dashboard extends Component {
   }
 
   render() {
-    const campObj = this.props.campaign[0];
-    let posts;
+    const campObj = this.props.campaign;
+    camp = campObj._id;
+
     let header;
     let profilePic;
     let storyImg;
@@ -39,44 +37,30 @@ class Dashboard extends Component {
     let affiliateList = 'You do not yet have any affiliates';
     let postFeed = 'You do not yet have any posts';
 
-    if (campObj) {
-      posts = campObj.posts.reverse();
+    if (campObj.posts) {
+      // posts = campObj.posts.reverse();
       header = campObj.assets.header;
       profilePic = campObj.assets.profile;
       storyImg = campObj.assets.storyImg;
       title = campObj.title;
       postFeed = (
-        <Feed>
-          {posts.map((post, i) => {
-            const { title, body, timestamp } = post;
-            return (
-              <Feed.Event
-                key={i}
-                icon="pencil"
-                date={moment(timestamp).format('dddd MMM Do')}
-                summary={title}
-                extraText={body}
-                />
-            );
-          })}
-
-        </Feed>
+        <PostsWidget campaign={campObj} />
       );
-      if(campObj.affiliates.length) {
+      if (campObj.affiliates.length) {
         affiliateList = (
           <List>
             {campObj.affiliates.map((affil, i) => {
               const { clicks, site, url } = affil;
               return (
                 <List.Item key={i}>
-                  <List.Icon name='linkify' />
-                  <List.Content content={<a href={url}>{site}</a>} />
+                  <List.Icon name="linkify" />
+                  <List.Content content={<a href={url} target="_blank" rel="noopener noreferrer">{site}</a>} />
                   <List.Description><Icon name="mouse pointer" /> {clicks} clicks</List.Description>
                 </List.Item>
-              )
+              );
             })}
           </List>
-        )
+        );
       }
     }
 
@@ -93,9 +77,21 @@ class Dashboard extends Component {
             <Grid.Column width={3}>
               <Image src={profilePic} fluid />
               <Header as="h2">{title}</Header>
+              <Button primary>Edit Campaign</Button>
             </Grid.Column>
             <Grid.Column width={10}>
               <Image src={storyImg} fluid />
+              <Header as="h2">Add Post:</Header>
+              <Form onSubmit={this.submitForm}>
+                <Form.Group widths="equal">
+                  <Form.Field control={Input} label="Title" name="title" onChange={this.handleChange} placeholder="Title" />
+                </Form.Group>
+                <Form.Field control={TextArea} label="body" name="body" onChange={this.handleChange} placeholder="Start typing..." />
+                <Form.Field control={Button}>Submit</Form.Field>
+              </Form>
+
+              <Header as="h2">Your Posts:</Header>
+              {postFeed}
             </Grid.Column>
             <Grid.Column width={3}>
               <Header as="h2">Your Affiliate Links:</Header>
@@ -105,23 +101,13 @@ class Dashboard extends Component {
           </Grid.Row>
         </Grid>
 
-        <Header as="h2">Add Post:</Header>
-        <Form onSubmit={this.submitForm}>
-          <Form.Group widths="equal">
-            <Form.Field control={Input} label="Title" name="title" onChange={this.handleChange} placeholder="Title" />
-          </Form.Group>
-          <Form.Field control={TextArea} label="body" name="body" onChange={this.handleChange} placeholder="Start typing..." />
-          <Form.Field control={Button}>Submit</Form.Field>
-        </Form>
 
-        <Header as="h2">Your Posts:</Header>
-        {postFeed}
       </Container>
     );
   }
 }
 
-const mapStateToProps = state => ({ campaign: state.campaign });
+const mapStateToProps = state => ({ campaign: state.userCampaign });
 
 const mapDispatchToProps = dispatch => ({
   addPost(post, camp) {

@@ -189,3 +189,7 @@ h2 span {
 .ui.secondary.inverted.menu {
   position: relative !important;
 }
+
+.profileImg {
+  margin: 0 auto !important;
+}

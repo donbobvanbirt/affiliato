@@ -70,6 +70,7 @@ class Dashboard extends Component {
 
   render() {
     const campObj = this.props.campaign;
+
     const { open, deleteOpen } = this.state;
 
     let header;
@@ -82,6 +83,10 @@ class Dashboard extends Component {
     let affiliateList = 'You do not yet have any affiliates';
     let postFeed = 'You do not yet have any posts';
     let affiliateLink;
+
+    if (campObj) {
+      camp = campObj._id;
+    }
 
     if (campObj) {
       camp = campObj._id;

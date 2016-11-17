@@ -32,27 +32,6 @@ searchInputSegment {
   margin-top: 19px !important;
 }
 
-@media only screen and (max-width: 780px) {
-  .searchFilterContainer {
-    padding-top: 0px;
-    height: 320px;
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  .ui.container {
-    width: 100% !important;
-    margin-left: auto !important;
-    /*margin-Right: auto !important;*/
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .advancedSearchButton {
-    width: 100%;
-  }
-}
-
 body {
   background-color: #F2F2F2;
 }
@@ -101,17 +80,23 @@ body {
 }
 
 /*for the Card divs on the home page*/
+.ui.grid {
+  padding: 22px !important;
+}
+
 .ui.card>.image {
   height: 14em;
 }
 
 .ui.cards>.card {
   overflow: hidden;
+  margin: auto;
   height: 28em;
 }
 
 .ui.card>.content, .ui.cards>.card>.content {
-  overflow: auto;
+  overflow: auto !important;
+  height: 17em;
 }
 
 .ui.cards {
@@ -119,8 +104,19 @@ body {
 }
 
 .ui.card>.extra.content, .ui.cards>.card>.extra.content {
-  overflow: hidden;
+  height: 3em !important;
+  overflow: hidden !important;
 }
+
+.ui.card:last-child {
+    margin-bottom: 14px !important;
+}
+
+.ui.card:first-child {
+    margin-top: 1em;
+}
+
+/*DELETE TO HERE!*/
 
 /*for the Home Page splash image*/
 .homeImageContainer {
@@ -157,6 +153,70 @@ h2 span {
    line-height: 2.5em;
 }
 
+.ui.secondary.menu .item>img:not(.ui) {
+  height: 50px;
+  width: 191px;
+}
+
+.navbarLogo {
+  position: absolute !important;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/*div.segment> div.mainNav.menu {*/
+.ui.secondary.inverted.menu {
+  position: relative !important;
+}
+
 .profileImg {
-  margin: 0 auto !important;  
+  margin: 0 auto !important;
+}
+
+@media only screen and (max-width: 1270px) {
+  .homeMessage {
+    top: 10% !important;
+    /*top: 10%;*/
+  }
+}
+
+@media only screen and (max-width: 1070px) {
+  .homeMessage {
+    top: 10% !important;
+    /*top: 10%;*/
+  }
+}
+
+@media only screen and (max-width: 860px) {
+  h2 span {
+   font: bold 20px/48px Helvetica, Sans-Serif;
+  }
+}
+
+@media only screen and (max-width: 780px) {
+  .searchFilterContainer {
+    padding-top: 0px;
+    height: 320px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .ui.container {
+    width: 100% !important;
+    margin-left: auto !important;
+    /*margin-Right: auto !important;*/
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .advancedSearchButton {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .homeMessage {
+    top: 3% !important;
+    /*top: 10%;*/
+  }
 }

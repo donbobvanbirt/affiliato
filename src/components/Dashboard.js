@@ -30,7 +30,7 @@ class Dashboard extends Component {
     const campObj = this.props.campaign;
     camp = campObj._id;
     console.log('campObj:', campObj);
-    let posts;
+    // let posts;
     let header;
     let profilePic;
     let storyImg;
@@ -39,7 +39,7 @@ class Dashboard extends Component {
     let postFeed = 'You do not yet have any posts';
 
     if (campObj.posts) {
-      posts = campObj.posts.reverse();
+      // posts = campObj.posts.reverse();
       header = campObj.assets.header;
       profilePic = campObj.assets.profile;
       storyImg = campObj.assets.storyImg;
@@ -78,7 +78,7 @@ class Dashboard extends Component {
             <Grid.Column width={3}>
               <Image src={profilePic} fluid />
               <Header as="h2">{title}</Header>
-
+              <Button primary>Edit Campaign</Button>
             </Grid.Column>
             <Grid.Column width={10}>
               <Image src={storyImg} fluid />

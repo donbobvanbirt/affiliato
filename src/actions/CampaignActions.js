@@ -51,7 +51,7 @@ export function receiveCampaign(data) {
   };
 }
 
-export function addedClick(data){
+export function editedCamp(data){
   return {
     type: 'UPDATE_CAMPAIGN',
     payload: data
@@ -99,6 +99,14 @@ export function addClick(campaign) {
   return (dispatch) => {
     axios.put(`/api/campaigns/${campaign._id}`, campaign)
     .then(res => res.data)
-    .then(res2 => dispatch(addedClick(res2)))
+    .then(res2 => dispatch(editedCamp(res2)))
+  };
+}
+
+export function editCampaign(campaign, id) {
+  return (dispatch) => {
+    axios.put(`/api/campaigns/${id}`, campaign)
+    .then(res => res.data)
+    .then(res2 => dispatch(editedCamp(res2)))
   };
 }

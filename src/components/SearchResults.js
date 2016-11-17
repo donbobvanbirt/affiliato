@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Icon } from 'semantic-ui-react';
+import { Container, Card, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 import * as SearchActions from '../actions/SearchActions';
@@ -15,8 +15,6 @@ import * as SearchActions from '../actions/SearchActions';
 }))
 
 // TODO Allow to search again with the Search NavBar
-
-// TODO add route for /search
 export default class SearchResults extends Component {
   constructor() {
     super();
@@ -100,7 +98,6 @@ export default class SearchResults extends Component {
     }
     return (
       <Container fluid>
-
         <Card.Group>
           {Campaigns}
         </Card.Group>

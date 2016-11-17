@@ -101,17 +101,23 @@ body {
 }
 
 /*for the Card divs on the home page*/
+.ui.grid {
+  padding: 22px !important;
+}
+
 .ui.card>.image {
   height: 14em;
 }
 
 .ui.cards>.card {
   overflow: hidden;
+  margin: auto;
   height: 28em;
 }
 
 .ui.card>.content, .ui.cards>.card>.content {
-  overflow: auto;
+  overflow: auto !important;
+  height: 17em;
 }
 
 .ui.cards {
@@ -119,8 +125,19 @@ body {
 }
 
 .ui.card>.extra.content, .ui.cards>.card>.extra.content {
-  overflow: hidden;
+  height: 3em !important;
+  overflow: hidden !important;
 }
+
+.ui.card:last-child {
+    margin-bottom: 14px !important;
+}
+
+.ui.card:first-child {
+    margin-top: 1em;
+}
+
+/*DELETE TO HERE!*/
 
 /*for the Home Page splash image*/
 .homeImageContainer {

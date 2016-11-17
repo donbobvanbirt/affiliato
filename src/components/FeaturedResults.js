@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import * as CampaignActions from '../actions/CampaignActions';
 
-import { Card, Icon } from 'semantic-ui-react';
+import { Card, Grid, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 @connect(state => ({
@@ -35,6 +35,7 @@ export default class FeaturedResults extends Component {
          return (
            <Card key={campaign._id}
              raised
+             centered
              image={campaign.assets.profile}
              header={campaign.title}
              meta={campaign.type}
@@ -42,20 +43,25 @@ export default class FeaturedResults extends Component {
              description={campaign.description}
              extra={(
                <a>
-                 <Icon name='user' />
+                 <Icon name="user" />
                  {campaign.supporters.length}
                </a>
              )}
            />
          );
-       })
+        });
     }
     return (
-      <div>
-        <Card.Group>
-          {Campaigns}
-        </Card.Group>
-      </div>
+      <Grid textAlign="center" className="featuredContainer">
+      {/* <div className='centerMePlease'> */}
+          {/* <Card.Group doubling> */}
+          {/* <Card.Group stackable> */}
+
+              {Campaigns}
+
+          {/* </Card.Group> */}
+      {/* </div> */}
+      </Grid>
 
     );
   }

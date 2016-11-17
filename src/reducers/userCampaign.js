@@ -10,6 +10,7 @@ export default function (state = {}, { type, payload }) {
     case 'UPDATE_CAMPAIGN':
       return payload;
     case 'INIT_AUTH_SUCCESS':
+      return payload.campaign;
     case 'SIGN_IN_SUCCESS':
       return payload.campaign;
     default:

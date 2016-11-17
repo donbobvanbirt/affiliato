@@ -1,22 +1,47 @@
 import React, { Component } from 'react';
-import { Form, Input, TextArea, Button, Container, Header, Feed, Grid, Image, List, Icon } from 'semantic-ui-react';
+import { Form, Input, TextArea, Button, Container, Header, Feed, Grid, Image, List, Icon, Modal } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
 import PostsWidget from './PostsWidget';
-import { submitPost, getCampaign } from '../actions/CampaignActions';
+import { submitPost, getCampaign, editCampaign } from '../actions/CampaignActions';
 
 let camp;
 
 class Dashboard extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = { open: false };
   }
 
   submitForm = (e) => {
     e.preventDefault();
     this.props.addPost(this.state, camp);
+  }
+
+  submitEditForm = (e, values) => {
+    e.preventDefault();
+    let { editCamp, campaign } = this.props;
+    let { title, description, header, profile, storyImg, moneyExplain, amazonURL, about, terms } = values;
+    const campaignObj = {
+      title,
+      description,
+      about,
+      moneyExplain,
+      affiliates: [{
+        site: 'Amazon',
+        url: amazonURL,
+        clicks: 0,
+      }],
+      assets: {
+        header,
+        storyImg,
+        profile,
+      },
+    };
+    // console.log('campaignObj:', campaignObj);
+    editCamp(campaignObj, campaign._id);
+    this.setState({ open: false });
   }
 
   handleChange = (e) => {
@@ -26,26 +51,43 @@ class Dashboard extends Component {
     });
   }
 
+  show = () => this.setState({ open: true })
+
+  hide = () => this.setState({ open: false })
+
   render() {
     const campObj = this.props.campaign;
+
+    const { open } = this.state;
 
     let header;
     let profilePic;
     let storyImg;
     let title;
+    let description;
+    let moneyExplain;
+    let about;
     let affiliateList = 'You do not yet have any affiliates';
     let postFeed = 'You do not yet have any posts';
+    let affiliateLink;
+
+    if (campObj) {
+      camp = campObj._id;
+    }
 
     if (campObj) {
       camp = campObj._id;
     }
 
     if (campObj.posts) {
-      // posts = campObj.posts.reverse();
       header = campObj.assets.header;
       profilePic = campObj.assets.profile;
       storyImg = campObj.assets.storyImg;
       title = campObj.title;
+      description = campObj.description;
+      moneyExplain = campObj.moneyExplain;
+      about = campObj.about;
+      affiliateLink = campObj.affiliates[0].url;
       postFeed = (
         <PostsWidget campaign={campObj} />
       );
@@ -80,10 +122,16 @@ class Dashboard extends Component {
             <Grid.Column width={3}>
               <Image src={profilePic} fluid />
               <Header as="h2">{title}</Header>
-              <Button primary>Edit Campaign</Button>
+              <Button onClick={this.show} primary>Edit Campaign</Button>
             </Grid.Column>
             <Grid.Column width={10}>
               <Image src={storyImg} fluid />
+              <Header as="h2">Description:</Header>
+              {description}
+              <Header as="h2">About:</Header>
+              {about}
+              <Header as="h2">How do you plan to spend the money?</Header>
+              {moneyExplain}
               <Header as="h2">Add Post:</Header>
               <Form onSubmit={this.submitForm}>
                 <Form.Group widths="equal">
@@ -104,13 +152,41 @@ class Dashboard extends Component {
           </Grid.Row>
         </Grid>
 
+        <div>
+          <Modal size="small" open={open} onClose={this.hide}>
+            <Modal.Header>Edit {title}</Modal.Header>
+            <Modal.Content>
+
+              <Form onSubmit={this.submitEditForm} size='big'>
+                <Form.Group widths="equal">
+                  <Form.Input label="Name" name="title" defaultValue={title} placeholder="Campaign Name" />
+                  <Form.Input label="Profile Picture" defaultValue={profilePic} name="profile" placeholder="Link to Profile Pic" />
+                  <Form.Input label="Header Picture" defaultValue={header} name="header" placeholder="Link to Header Pic" />
+                </Form.Group>
+                <Form.TextArea name="description" defaultValue={description} label="Campaign Description" placeholder="Explain your campaign. . ." rows="3" />
+                <Form.TextArea name="about" defaultValue={about} label="Who are you?" placeholder="Who are you?" rows="3" />
+                <Form.TextArea name="moneyExplain" defaultValue={moneyExplain} label="How are you going to spend the money?" placeholder="What are you going to spend the money on?" rows="3" />
+                <Form.Group widths="equal">
+                  <Form.Input label="Story Picture" defaultValue={storyImg} name="storyImg" placeholder="Link to Story Pic" />
+                  <Form.Input label="Amazon Affiliate Link" defaultValue={affiliateLink} name="amazonURL" placeholder="Amazon Affiliate Link" />
+                </Form.Group>
+                <Form.Checkbox name="terms" label="I agree to the Terms and Conditions" />
+                <Button fluid type="submit" primary content="Save Changes" />
+              </Form>
+
+            </Modal.Content>
+            <Modal.Actions>
+              <Button fluid onClick={this.hide} default>Cancel</Button>
+            </Modal.Actions>
+          </Modal>
+        </div>
 
       </Container>
     );
   }
 }
 
-const mapStateToProps = state => ({ campaign: state.userCampaign });
+const mapStateToProps = state => ({ campaign: state.userCampaign, userId: state.user._id });
 
 const mapDispatchToProps = dispatch => ({
   addPost(post, camp) {
@@ -118,6 +194,9 @@ const mapDispatchToProps = dispatch => ({
   },
   getCamp(campaign) {
     dispatch(getCampaign(campaign));
+  },
+  editCamp(campaign, id) {
+    dispatch(editCampaign(campaign, id));
   },
 });
 

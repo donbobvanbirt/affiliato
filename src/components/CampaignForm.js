@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Button, Form ,Header, Icon} from "semantic-ui-react";
-import { createCampaign } from '../actions/CampaignActions';
+import { Container, Button, Form, Header, Icon } from 'semantic-ui-react';
 import { browserHistory } from 'react-router';
+
+import { createCampaign } from '../actions/CampaignActions';
 
 @connect(state => ({
   campaign: state.campaign,
@@ -25,19 +26,19 @@ export default class CampaignForm extends Component {
       affiliates: [{
         site: 'Amazon',
         url: amazonURL,
-        clicks: 0
+        clicks: 0,
       }],
       assets: {
         header,
         storyImg,
-        profile
-      }
-    }
+        profile,
+      },
+    };
     createCampaign(campaignObj, userId);
-    browserHistory.push('/campaignProfile');
+    browserHistory.push('/dashboard');
   }
   render() {
-    let { campaign } = this.props;
+    const { campaign } = this.props;
     return (
       <Container className="campaign-form">
         <Header textAlign="center" as="h2" icon>
@@ -47,9 +48,9 @@ export default class CampaignForm extends Component {
             Include compelling images and descriptions of your story.
           </Header.Subheader>
         </Header>
-        <Form onSubmit={this.handleSubmit.bind(this)} size='big'>
+        <Form onSubmit={this.handleSubmit.bind(this)} size="big">
           <Form.Group widths="equal">
-            <Form.Input label="Name" name="title" placeholder="Campaign Name"/>
+            <Form.Input label="Name" name="title" placeholder="Campaign Name" />
             <Form.Input label="Profile Picture" name="profile" placeholder="Link to Profile Pic" />
             <Form.Input label="Header Picture" name="header" placeholder="Link to Header Pic" />
           </Form.Group>
@@ -60,7 +61,7 @@ export default class CampaignForm extends Component {
             <Form.Input label="Story Picture" name="storyImg" placeholder="Link to Story Pic" />
             <Form.Input label="Amazon Affiliate Link" name="amazonURL" placeholder="Amazon Affiliate Link" />
           </Form.Group>
-          <Form.Checkbox name="terms" label="I agree to the Terms and Conditions"/>
+          <Form.Checkbox name="terms" label="I agree to the Terms and Conditions" />
           <Button fluid size="big" primary type="submit">Create Campaign</Button>
         </Form>
       </Container>

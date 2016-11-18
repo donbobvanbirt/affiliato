@@ -84,41 +84,40 @@ class Dashboard extends Component {
     let postFeed = 'You do not yet have any posts';
     let affiliateLink;
 
-    if (campObj) {
-      camp = campObj._id;
-    }
+    // if (campObj) {
+    //   camp = campObj._id;
+    // }
 
     if (campObj) {
       camp = campObj._id;
-    }
-
-    if (campObj.posts) {
-      header = campObj.assets.header;
-      profilePic = campObj.assets.profile;
-      storyImg = campObj.assets.storyImg;
-      title = campObj.title;
-      description = campObj.description;
-      moneyExplain = campObj.moneyExplain;
-      about = campObj.about;
-      affiliateLink = campObj.affiliates[0].url;
-      postFeed = (
-        <PostsWidget campaign={campObj} />
-      );
-      if (campObj.affiliates.length) {
-        affiliateList = (
-          <List>
-            {campObj.affiliates.map((affil, i) => {
-              const { clicks, site, url } = affil;
-              return (
-                <List.Item key={i}>
-                  <List.Icon name="linkify" />
-                  <List.Content content={<a href={url} target="_blank" rel="noopener noreferrer">{site}</a>} />
-                  <List.Description><Icon name="mouse pointer" /> {clicks} clicks</List.Description>
-                </List.Item>
-              );
-            })}
-          </List>
+      if (campObj.posts) {
+        header = campObj.assets.header;
+        profilePic = campObj.assets.profile;
+        storyImg = campObj.assets.storyImg;
+        title = campObj.title;
+        description = campObj.description;
+        moneyExplain = campObj.moneyExplain;
+        about = campObj.about;
+        affiliateLink = campObj.affiliates[0].url;
+        postFeed = (
+          <PostsWidget campaign={campObj} />
         );
+        if (campObj.affiliates.length) {
+          affiliateList = (
+            <List>
+              {campObj.affiliates.map((affil, i) => {
+                const { clicks, site, url } = affil;
+                return (
+                  <List.Item key={i}>
+                    <List.Icon name="linkify" />
+                    <List.Content content={<a href={url} target="_blank" rel="noopener noreferrer">{site}</a>} />
+                    <List.Description><Icon name="mouse pointer" /> {clicks} clicks</List.Description>
+                  </List.Item>
+                );
+              })}
+            </List>
+          );
+        }
       }
     }
 

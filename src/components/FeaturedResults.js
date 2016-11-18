@@ -24,8 +24,6 @@ export default class FeaturedResults extends Component {
 
   render () {
     let { campaigns } = this.props;
-    console.log('this.props: ', this.props);
-    console.log('campaigns 00: ', campaigns);
     let Campaigns = [];
     if (campaigns.length) {
       Campaigns =

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Container, Button, Header, Grid, Image, Card, Input, Statistic, Segment } from 'semantic-ui-react';
 import * as CampaignActions from '../actions/CampaignActions';
 import PostsWidget from './PostsWidget';
+let ClipboardButton = require('react-clipboard.js');
 
 @connect(state => ({
   campaign: state.campaign[0],
@@ -126,16 +127,22 @@ export default class ClientPage extends Component {
                     Affiliate Link
                   </Card.Meta>
                   <Card.Description>
-                    <Input
+                    {/* <Input
                       action={{ color: 'teal', labelPosition: 'right', icon: 'copy' }}
                       defaultValue={amazonLink}
-                    />
+                    /> */}
+                    {amazonLink && <input type="text" id='bar' value={amazonLink}/>}
+                    {amazonLink && <ClipboardButton data-clipboard-text={amazonLink}>Copy</ClipboardButton>}
                   </Card.Description>
                 </Card.Content>
                 <Container>
                   <Card.Content extra>
                     <div className="ui two buttons">
-                      <Button className="affiliateButton" basic fluid size="big" color="teal" onClick={() => this.trackClick()}>Direct Link</Button>
+                      <a target="_blank" href={'http://WWW.AMAZON.COM'}>
+                        <Button className="affiliateButton" basic fluid size="big" color="teal" onClick={() => this.trackClick()}>
+                          Direct Link
+                        </Button>
+                      </a>
                     </div>
                   </Card.Content>
                 </Container>

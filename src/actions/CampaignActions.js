@@ -19,7 +19,6 @@ export function createCampaign(campaign, userId) {
 }
 
 export function receiveCampaigns(campaigns) {
-  console.log('campaigns:', campaigns);
   return {
     type: 'RECEIVE_CAMPAIGNS',
     payload: campaigns,

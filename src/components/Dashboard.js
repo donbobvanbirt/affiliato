@@ -204,7 +204,7 @@ class Dashboard extends Component {
             </Modal.Content>
             <Modal.Actions>
               <Button onClick={this.hideDelete} floated="left" color="green" inverted><Icon name="checkmark" /> Cancel</Button>
-              <Button onClick={this.deleteCampaign} basic floated="left" color="red" inverted><Icon name="remove" /> Delete</Button>
+              <Button onClick={this.deleteCampaign} floated="left" basic color="red" inverted><Icon name="remove" /> Delete</Button>
             </Modal.Actions>
           </Modal>
         </div>

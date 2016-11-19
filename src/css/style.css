@@ -173,6 +173,10 @@ h2 span {
   margin: 0 auto !important;
 }
 
+.advancedSearchButtonMobile {
+  display: none !important;
+}
+
 /*Hamburger Menu with CSS only*/
 /*Hamburger Menu with CSS only*/
 /*Hamburger Menu with CSS only*/
@@ -286,6 +290,12 @@ ul.topnav li.icon {display: none;}
   .homeMessage {
     top: 10% !important;
     /*top: 10%;*/
+  }
+  .advancedSearchButton {
+    display: none !important;
+  }
+  .advancedSearchButtonMobile {
+    display: block !important;
   }
 }
 

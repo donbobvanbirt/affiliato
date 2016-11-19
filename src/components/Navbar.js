@@ -59,15 +59,38 @@ export default class Navbar1 extends Component {
 
     let Dropdown = '';
     if (burger === 'burgerContainer change') {
+      this.props.loggedIn?
       Dropdown = (
         <ul className="topnav responsive" id="myTopnav">
           <Link className="burgerLink" to="/">Home</Link>
           <Link className="burgerLink" to="/createNewCampaign">Create a Campaign</Link>
           <Link className="burgerLink" to="/search">Search</Link>
           <Link className="burgerLink" to="/dashboard">Dashboard</Link>
-          <Link className="burgerLink" to="/dashboard">Log Out</Link>
+          <Link
+            className="burgerLink" to="/login" onClick={() => {
+              this._toggleBurger();
+              this.props.signOut();
+              // browserHistory.push('/login');
+            }}
+          >Log Out</Link>
         </ul>
-    );
+    )
+    :
+    Dropdown = (
+      <ul className="topnav responsive" id="myTopnav">
+        <Link className="burgerLink" to="/">Home</Link>
+        <Link className="burgerLink" to="/login">Create a Campaign</Link>
+        <Link className="burgerLink" to="/search">Search</Link>
+        {/* <Link className="burgerLink" to="/login">Sign Up</Link> */}
+        <Link
+          className="burgerLink" to="/login" onClick={() => {
+            this._toggleBurger();
+            this.props.signOut();
+            // browserHistory.push('/login');
+          }}
+        >Log In</Link>
+      </ul>
+  );
     }
 
     return (
@@ -136,17 +159,32 @@ export default class Navbar1 extends Component {
                   }}
                 />
                 <Menu.Menu position="right">
-                  <Menu.Item
+                  <Menu.Item>
+                    {/* <Form> */}
+                    <Form className="navSearchForm" onSubmit={this.search.bind(this)}>
+                      <Form.Field>
+                        <Input name="query" id="searchInput" icon={{ name: 'search', link: true}} placeholder="Search" />
+                      </Form.Field>
+                    </Form>
+                  </Menu.Item>
+                  {/* <Menu.Item
                     name="Sign Up" active={active === 'signUp'} onClick={() => {
                       this.handleItemClick('signUp', '/register');
                     }}
-                  />
+                  /> */}
                   <Menu.Item
                     name="Log In" active={active === 'logIn'} onClick={() => {
                       this.handleItemClick('logIn', '/login');
                     }}
                   />
                 </Menu.Menu>
+                <Menu.Item>
+                  <div className={burger} onClick={() => this._toggleBurger()}>
+                    <div className="bar1" />
+                    <div className="bar2" />
+                    <div className="bar3" />
+                  </div>
+                </Menu.Item>
               </Menu>
             }
         </Segment>

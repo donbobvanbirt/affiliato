@@ -1,34 +1,32 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
-import { Menu, Segment, Input, Form } from 'semantic-ui-react';
-// import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
-
+// import { Menu, Segment, Input, Form } from 'semantic-ui-react';
+import { Navbar }
 import { signOut } from '../actions/auth';
 
-@connect(state => ({
+@connect(state=> ({
   loggedIn: !!state.user._id,
-  user: state.user,
+  user: state.user
 }), dispatch => ({
   signOut() {
     dispatch(signOut());
-  },
+  }
   /*
   search(q) {
     dispatch(search(q));
   }
   */
 }))
-export default class Navbar1 extends Component {
+export default class Navbar extends Component {
   constructor() {
-    super();
+      super();
 
-    this.state = {
-      active: 'home',
-      burger: 'burgerContainer',
-    };
-    // this._toggleBurger = this._toggleBurger.bind(this);
-  }
+      this.state = {
+        active: 'home'
+      }
+
+    }
 
   handleItemClick = (name, path) => {
     this.setState({ active: name });
@@ -37,7 +35,8 @@ export default class Navbar1 extends Component {
 
   search = (e, formInput) => {
     e.preventDefault();
-    const { query } = formInput;
+    let { query } = formInput;
+    console.log('query: ', query);
     console.log('serializedForm:', `/search/${encodeURI(query)}`);
     // call action to search(query);
     // |||||||||||||||||||||||||
@@ -45,28 +44,18 @@ export default class Navbar1 extends Component {
     browserHistory.push(`/search/${encodeURI(query)}`);
   }
 
-  _toggleBurger() {
-    let { burger } = this.state;
-    console.log('burger: ', burger);
-    burger === 'burgerContainer' ? burger = 'burgerContainer change' : burger = 'burgerContainer';
-    this.setState({
-      burger,
-    });
-  }
-
   render() {
-    const { active, burger } = this.state;
+    const { active } = this.state;
     const { user } = this.props;
 
     return (
       <Segment className='orangeColor' size='huge' attached>
-        {
-          this.props.loggedIn?
+        {this.props.loggedIn?
           <Menu className='orangeColor mainNav' size='huge' inverted secondary>
-            <Menu.Item className='navHome' name='home' active={active === 'home'} onClick={() => {
+            <Menu.Item name='home' active={active === 'home'} onClick={() => {
               this.handleItemClick('home', '/');
             }} />
-            <Menu.Item className='navNewCampaign' name='Create New Campaign' active={active === 'createNewCamp'} onClick={() => {
+            <Menu.Item name='Create New Campaign' active={active === 'createNewCamp'} onClick={() => {
               this.handleItemClick('createNewCamp', '/createNewCampaign');
               }} />
               <Menu.Item className='navbarLogo'>
@@ -77,7 +66,7 @@ export default class Navbar1 extends Component {
 
                 <Menu.Item>
                   {/* <Form> */}
-                  <Form className='navSearchForm' onSubmit={this.search.bind(this)}>
+                  <Form onSubmit={this.search.bind(this)}>
                     <Form.Field>
                       <Input name='query' icon='search' id='searchInput' icon={{ name: 'search', link: true}} placeholder='Search' />
                       {/* <Input name='query' icon='search' id='searchInput' icon={{ name: 'search', link: true}} placeholder='Search' onClick={this.search.bind(this)} /> */}
@@ -85,22 +74,14 @@ export default class Navbar1 extends Component {
                   </Form>
                 </Menu.Item>
 
-                <Menu.Item className='navDashboard' name='Dashboard' active={active === 'dashboard'} onClick={() => {
+                <Menu.Item name='Dashboard' active={active === 'dashboard'} onClick={() => {
                   this.handleItemClick('dashboard', '/dashboard');
                 }} />
-                <Menu.Item className='navLogout' name='Log Out' active={active === 'logOut'} onClick={() => {
+                <Menu.Item name='Log Out' active={active === 'logOut'} onClick={() => {
                   this.props.signOut();
                   browserHistory.push('/login');
                 }} />
-                <Menu.Item>
-                  <div className={burger} onClick={() => this._toggleBurger()}>
-                    <div className="bar1"></div>
-                    <div className="bar2"></div>
-                    <div className="bar3"></div>
-                  </div>
-                </Menu.Item>
               </Menu.Menu>
-
             </Menu>
             :
             <Menu className='orangeColor mainNav' size='huge' inverted secondary>

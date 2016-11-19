@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Button, Header, Grid, Image, Card, Input, Statistic, Segment } from 'semantic-ui-react';
 import * as CampaignActions from '../actions/CampaignActions';
+
 import PostsWidget from './PostsWidget';
+import Tweets from './Tweets';
 
 @connect(state => ({
   campaign: state.campaign[0],
@@ -42,6 +44,9 @@ export default class ClientPage extends Component {
     let campTitle;
     let campDescription;
     let postWidget;
+    let tweetList = (
+      <Tweets twitterUserName="donbobvanbirt"/>
+    )
 
     if (campaign) {
       const amazon = campaign.affiliates[0];
@@ -140,6 +145,8 @@ export default class ClientPage extends Component {
                   </Card.Content>
                 </Container>
               </Card>
+              <div id="tweetWidget"></div>
+              {tweetList}
             </Grid.Column>
           </Grid.Row>
         </Grid>

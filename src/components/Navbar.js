@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { browserHistory } from 'react-router';
+import { browserHistory, Link } from 'react-router';
 import { connect } from 'react-redux';
 import { Menu, Segment, Input, Form } from 'semantic-ui-react';
 // import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
@@ -56,71 +56,102 @@ export default class Navbar1 extends Component {
 
   render() {
     const { active, burger } = this.state;
-    const { user } = this.props;
+
+    let Dropdown = '';
+    if (burger === 'burgerContainer change') {
+      Dropdown = (
+        <ul className="topnav responsive" id="myTopnav">
+          <Link className="burgerLink" to="/">Home</Link>
+          <Link className="burgerLink" to="/createNewCampaign">Create a Campaign</Link>
+          <Link className="burgerLink" to="/search">Search</Link>
+          <Link className="burgerLink" to="/dashboard">Dashboard</Link>
+          <Link className="burgerLink" to="/dashboard">Log Out</Link>
+        </ul>
+    );
+    }
 
     return (
-      <Segment className='orangeColor' size='huge' attached>
-        {
-          this.props.loggedIn?
-          <Menu className='orangeColor mainNav' size='huge' inverted secondary>
-            <Menu.Item className='navHome' name='home' active={active === 'home'} onClick={() => {
-              this.handleItemClick('home', '/');
-            }} />
-            <Menu.Item className='navNewCampaign' name='Create New Campaign' active={active === 'createNewCamp'} onClick={() => {
-              this.handleItemClick('createNewCamp', '/createNewCampaign');
-              }} />
-              <Menu.Item className='navbarLogo'>
-                  <img src='assets/images/affiliatoLogoTransparent.png' />
-              {/* <Menu.Item src='../../public/assets/images/affiliatoLogo.png' /> */}
-              </Menu.Item>
-              <Menu.Menu position='right'>
-
-                <Menu.Item>
-                  {/* <Form> */}
-                  <Form className='navSearchForm' onSubmit={this.search.bind(this)}>
-                    <Form.Field>
-                      <Input name='query' icon='search' id='searchInput' icon={{ name: 'search', link: true}} placeholder='Search' />
-                      {/* <Input name='query' icon='search' id='searchInput' icon={{ name: 'search', link: true}} placeholder='Search' onClick={this.search.bind(this)} /> */}
-                    </Form.Field>
-                  </Form>
+      <div>
+        <Segment className="orangeColor" size="huge" attached>
+          {
+            this.props.loggedIn?
+              <Menu className="orangeColor mainNav" size="huge" inverted secondary>
+                <Menu.Item
+                  className="navHome" name="home" active={active === 'home'} onClick={() => {
+                    this.handleItemClick('home', '/');
+                  }}
+                />
+                <Menu.Item
+                  className="navNewCampaign" name="Create A Campaign" active={active === 'createNewCamp'} onClick={() => {
+                    this.handleItemClick('createNewCamp', '/createNewCampaign');
+                  }}
+                />
+                <Menu.Item className="navbarLogo">
+                  <img src="assets/images/affiliatoLogoTransparent.png" alt="Affiliato Logo" />
+                  {/* <Menu.Item src="../../public/assets/images/affiliatoLogo.png" /> */}
                 </Menu.Item>
+                <Menu.Menu position="right">
 
-                <Menu.Item className='navDashboard' name='Dashboard' active={active === 'dashboard'} onClick={() => {
-                  this.handleItemClick('dashboard', '/dashboard');
-                }} />
-                <Menu.Item className='navLogout' name='Log Out' active={active === 'logOut'} onClick={() => {
-                  this.props.signOut();
-                  browserHistory.push('/login');
-                }} />
-                <Menu.Item>
-                  <div className={burger} onClick={() => this._toggleBurger()}>
-                    <div className="bar1"></div>
-                    <div className="bar2"></div>
-                    <div className="bar3"></div>
-                  </div>
-                </Menu.Item>
-              </Menu.Menu>
+                  <Menu.Item>
+                    {/* <Form> */}
+                    <Form className="navSearchForm" onSubmit={this.search.bind(this)}>
+                      <Form.Field>
+                        <Input name="query" id="searchInput" icon={{ name: 'search', link: true}} placeholder="Search" />
+                        {/* <Input name="query" icon="search" id="searchInput" icon={{ name: "search", link: true}} placeholder="Search" onClick={this.search.bind(this)} /> */}
+                      </Form.Field>
+                    </Form>
+                  </Menu.Item>
 
-            </Menu>
-            :
-            <Menu className='orangeColor mainNav' size='huge' inverted secondary>
-              <Menu.Item name='home' active={active === 'home'} onClick={() => {
-                this.handleItemClick('home', '/');
-              }} />
-              <Menu.Item name='Create New Campaign' active={active === 'createNewCamp'} onClick={() => {
-                this.handleItemClick('createNewCamp', '/login');
-              }} />
-              <Menu.Menu position='right'>
-                <Menu.Item name='Sign Up' active={active === 'signUp'} onClick={() => {
-                  this.handleItemClick('signUp', '/register');
-                }} />
-                <Menu.Item name='Log In' active={active === 'logIn'} onClick={() => {
-                  this.handleItemClick('logIn', '/login');
-                }} />
-              </Menu.Menu>
-            </Menu>
-          }
-      </Segment>
-    )
+                  <Menu.Item
+                    className="navDashboard" name="Dashboard" active={active === 'dashboard'} onClick={() => {
+                      this.handleItemClick('dashboard', '/dashboard');
+                    }}
+                  />
+                  <Menu.Item
+                    className="navLogout" name="Log Out" active={active === 'logOut'} onClick={() => {
+                      this.props.signOut();
+                      browserHistory.push('/login');
+                    }}
+                  />
+                  <Menu.Item>
+                    <div className={burger} onClick={() => this._toggleBurger()}>
+                      <div className="bar1" />
+                      <div className="bar2" />
+                      <div className="bar3" />
+                    </div>
+                  </Menu.Item>
+                </Menu.Menu>
+
+              </Menu>
+              :
+              <Menu className="orangeColor mainNav" size="huge" inverted secondary>
+                <Menu.Item
+                  name="home" active={active === 'home'} onClick={() => {
+                    this.handleItemClick('home', '/');
+                  }}
+                />
+                <Menu.Item
+                  name="Create New Campaign" active={active === 'createNewCamp'} onClick={() => {
+                    this.handleItemClick('createNewCamp', '/login');
+                  }}
+                />
+                <Menu.Menu position="right">
+                  <Menu.Item
+                    name="Sign Up" active={active === 'signUp'} onClick={() => {
+                      this.handleItemClick('signUp', '/register');
+                    }}
+                  />
+                  <Menu.Item
+                    name="Log In" active={active === 'logIn'} onClick={() => {
+                      this.handleItemClick('logIn', '/login');
+                    }}
+                  />
+                </Menu.Menu>
+              </Menu>
+            }
+        </Segment>
+        { Dropdown }
+      </div>
+    );
   }
 }

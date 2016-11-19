@@ -11,11 +11,11 @@ import Login from './Login';
 import Dashboard from './Dashboard';
 import Home from './Home';
 
-import SignIn from './SignIn';
+// import SignIn from './SignIn';
 import Secret from './Secret';
 
 function authCheck(nextState, transition) {
-  let user = firebaseAuth.currentUser;
+  const user = firebaseAuth.currentUser;
   if (!user) {
     transition('/login');
   }

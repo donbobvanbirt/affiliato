@@ -134,10 +134,10 @@ class Dashboard extends Component {
             <Grid.Column width={3}>
               <Image src={profilePic} fluid />
               <Header as="h2">{title}</Header>
-              <Button basic onClick={this.preview} color="blue"><Icon name="mouse pointer" />Preview</Button>
-              <Button basic onClick={this.show} color="green"><Icon name="edit" />Edit</Button>
+              <Button size="mini" basic onClick={this.preview} color="blue"><Icon name="mouse pointer" />Preview</Button>
+              <Button size="mini" basic onClick={this.show} color="green"><Icon name="edit" />Edit</Button>
               <hr />
-              <Button basic onClick={this.deleteModalShow} color="red"><Icon name="remove" />Delete</Button>
+              <Button size="mini" basic onClick={this.deleteModalShow} color="red"><Icon name="remove" />Delete</Button>
             </Grid.Column>
             <Grid.Column width={10}>
               <Image src={storyImg} fluid />

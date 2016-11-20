@@ -31,7 +31,7 @@ class Dashboard extends Component {
       affiliates: [{
         site: 'Amazon',
         url: amazonURL,
-        clicks: 0,
+        clicks: campaign.affiliates[0].clicks,
       }],
       assets: {
         header,

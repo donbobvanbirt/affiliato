@@ -14,19 +14,21 @@ import { createCampaign } from '../actions/CampaignActions';
   },
 }))
 export default class CampaignForm extends Component {
-  handleSubmit(e, values) {
+  handleSubmit = (e, values) => {
     e.preventDefault();
     let { createCampaign, userId } = this.props;
-    let { title, description, header, profile, storyImg, moneyExplain, amazonURL, about, terms } = values;
+    let { title, description, header, profile, storyImg, moneyExplain, amazonURL, about, terms, twitterHandle } = values;
+
     if (title && description && amazonURL) {
-      if (!header) { header = 'https://stormideaswus.blob.core.windows.net/headerjunction/2014/91/6d2380c6-00e3-4f58-a911-c8aa98afa460.jpg'}
-      if (!storyImg) { storyImg = 'https://stormideaswus.blob.core.windows.net/headerjunction/2014/91/d63adef3-99cf-411a-b2e3-e99a3e8e82e9.jpg'}
-      if (!profile) { profile = 'http://www.sessionlogs.com/media/icons/defaultIcon.png'}
+      if (!header) { header = 'https://stormideaswus.blob.core.windows.net/headerjunction/2014/91/6d2380c6-00e3-4f58-a911-c8aa98afa460.jpg' };
+      if (!storyImg) { storyImg = 'https://stormideaswus.blob.core.windows.net/headerjunction/2014/91/d63adef3-99cf-411a-b2e3-e99a3e8e82e9.jpg' };
+      if (!profile) { profile = 'http://www.sessionlogs.com/media/icons/defaultIcon.png' };
       const campaignObj = {
         title,
         description,
         about,
         moneyExplain,
+        twitterHandle,
         affiliates: [{
           site: 'Amazon',
           url: amazonURL,
@@ -41,7 +43,7 @@ export default class CampaignForm extends Component {
       createCampaign(campaignObj, userId);
       browserHistory.push('/dashboard');
     } else {
-      alert('Please complete all required fields')
+      alert('Please complete all required fields');
     }
   }
   render() {
@@ -58,6 +60,7 @@ export default class CampaignForm extends Component {
         <Form onSubmit={this.handleSubmit.bind(this)} size="big">
           <Form.Group widths="equal">
             <Form.Input label="Name" name="title" placeholder="Campaign Name" required />
+
             <Form.Input label="Profile Picture" name="profile" placeholder="Link to Profile Pic" />
             <Form.Input label="Header Picture" name="header" placeholder="Link to Header Pic" />
           </Form.Group>
@@ -66,6 +69,7 @@ export default class CampaignForm extends Component {
           <Form.TextArea name="moneyExplain" label="How are you going to spend the money?" placeholder="What are you going to spend the money on?" rows="3" />
           <Form.Group widths="equal">
             <Form.Input label="Story Picture" name="storyImg" placeholder="Link to Story Pic" />
+            <Form.Input label="Twitter Username" name="twitterHandle" placeholder="Twitter Username" />
             <Form.Input label="Amazon Affiliate Link" name="amazonURL" placeholder="Amazon Affiliate Link" required />
           </Form.Group>
           <Form.Checkbox name="terms" label="I agree to the Terms and Conditions" />

@@ -134,6 +134,7 @@ body {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 17px;
 }
 
 .homeMessage {
@@ -173,6 +174,17 @@ h2 span {
   margin: 0 auto !important;
 }
 
+
+.paddingzero {
+  padding: 0px !important;
+}
+
+.marginzero {
+  margin: 0 auto !important;
+}
+.whitebg {
+  background-color: white !important;
+}
 .advancedSearchButtonMobile {
   display: none !important;
 }
@@ -268,6 +280,7 @@ ul.topnav li.icon {display: none;}
     display: block;
     text-align: left;
   }
+
 }
 
 @media only screen and (max-width: 1270px) {

@@ -44,9 +44,7 @@ export default class ClientPage extends Component {
     let campTitle;
     let campDescription;
     let postWidget;
-    let tweetList = (
-      <Tweets twitterUserName="donbobvanbirt"/>
-    )
+    let tweetList = '';
 
     if (campaign) {
       const amazon = campaign.affiliates[0];
@@ -57,6 +55,11 @@ export default class ClientPage extends Component {
       campTitle = campaign.title;
       campDescription = campaign.description;
       postWidget = <PostsWidget campaign={campaign} />;
+      if (campaign.twitterHandle) {
+        tweetList = (
+          <Tweets twitterUserName={campaign.twitterHandle} />
+        )
+      }
       if (amazon) {
         amazonLink = amazon.url;
       }

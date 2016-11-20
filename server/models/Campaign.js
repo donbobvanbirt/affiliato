@@ -23,6 +23,7 @@ const campaignSchema = new mongoose.Schema({
     profile: { type: String, required: true },
   },
   timestamp: { type: Date, required: true, default: Date.now },
+  twitterHandle: { type: String },
 });
 
 const Campaign = mongoose.model('Campaign', campaignSchema);

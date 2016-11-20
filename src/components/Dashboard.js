@@ -21,16 +21,17 @@ class Dashboard extends Component {
   submitEditForm = (e, values) => {
     e.preventDefault();
     let { editCamp, campaign } = this.props;
-    let { title, description, header, profile, storyImg, moneyExplain, amazonURL, about, terms } = values;
+    let { title, description, header, profile, storyImg, moneyExplain, amazonURL, about, terms, twitterHandle } = values;
     const campaignObj = {
       title,
       description,
       about,
       moneyExplain,
+      twitterHandle,
       affiliates: [{
         site: 'Amazon',
         url: amazonURL,
-        clicks: 0,
+        clicks: campaign.affiliates[0].clicks,
       }],
       assets: {
         header,
@@ -83,10 +84,7 @@ class Dashboard extends Component {
     let affiliateList = 'You do not yet have any affiliates';
     let postFeed = 'You do not yet have any posts';
     let affiliateLink;
-
-    // if (campObj) {
-    //   camp = campObj._id;
-    // }
+    let twitterHandle;
 
     if (campObj) {
       camp = campObj._id;
@@ -98,6 +96,7 @@ class Dashboard extends Component {
         description = campObj.description;
         moneyExplain = campObj.moneyExplain;
         about = campObj.about;
+        twitterHandle = campObj.twitterHandle;
         affiliateLink = campObj.affiliates[0].url;
         postFeed = (
           <PostsWidget campaign={campObj} />
@@ -175,6 +174,9 @@ class Dashboard extends Component {
               <Form onSubmit={this.submitEditForm} size="big">
                 <Form.Group widths="equal">
                   <Form.Input label="Name" name="title" defaultValue={title} placeholder="Campaign Name" />
+                  <Form.Input label="Twitter Username" name="twitterHandle" defaultValue={twitterHandle} placeholder="Twitter Username" />
+                </Form.Group>
+                <Form.Group widths="equal">
                   <Form.Input label="Profile Picture" defaultValue={profilePic} name="profile" placeholder="Link to Profile Pic" />
                   <Form.Input label="Header Picture" defaultValue={header} name="header" placeholder="Link to Header Pic" />
                 </Form.Group>

@@ -286,7 +286,6 @@ ul.topnav li.icon {display: none;}
 @media only screen and (max-width: 1270px) {
   .homeMessage {
     top: 10% !important;
-    /*top: 10%;*/
   }
 }
 
@@ -296,25 +295,35 @@ ul.topnav li.icon {display: none;}
   }
 }
 
-/* TODO delete this? */
-/* TODO delete this? */
-/* TODO delete this? */
 @media only screen and (max-width: 1070px) {
   .homeMessage {
     top: 10% !important;
-    /*top: 10%;*/
   }
+
+}
+
+@media only screen and (max-width: 960px) {
+  .navbarLogo {
+    margin-left: -7em !important;
+  }
+}
+
+@media only screen and (max-width: 805px) {
   .advancedSearchButton {
     display: none !important;
   }
   .advancedSearchButtonMobile {
     display: block !important;
   }
+
+  .ui.basic.black.button, .ui.basic.black.buttons.button  {
+    width: 100% !important;
+  }
 }
 
-@media only screen and (max-width: 960px) {
-  .navbarLogo {
-    margin-left: -7em !important;
+@media only screen and (min-width: 769px) {
+  ul.topnav {
+    display: none !important;
   }
 }
 /*HAMBURGER TRANSITION*/
@@ -333,6 +342,14 @@ ul.topnav li.icon {display: none;}
   .navHome, .navNewCampaign, .navSearchForm, .navDashboard, .navLogout {
     display: none !important;
   }
+
+  /*.ui.secondary.inverted.menu .active.item {
+    display: none;
+  }
+
+  .ui.seconday.inverted.menu .link.item, .ui.secondary.inverted.menu .a.item {
+    display: none !important;
+  }*/
 }
 
 @media only screen and (max-width: 860px) {
@@ -352,13 +369,6 @@ ul.topnav li.icon {display: none;}
   .ui.container {
     width: 100% !important;
     margin-left: auto !important;
-    /*margin-Right: auto !important;*/
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .advancedSearchButton {
-    width: 100%;
   }
 }
 

@@ -19,7 +19,7 @@ import { signOut } from '../actions/auth';
   }
   */
 }))
-export default class Navbar1 extends Component {
+export default class Navbar extends Component {
   constructor() {
     super();
 
@@ -62,10 +62,10 @@ export default class Navbar1 extends Component {
       this.props.loggedIn?
       Dropdown = (
         <ul className="topnav responsive" id="myTopnav">
-          <Link className="burgerLink" to="/">Home</Link>
-          <Link className="burgerLink" to="/createNewCampaign">Create a Campaign</Link>
-          <Link className="burgerLink" to="/search">Search</Link>
-          <Link className="burgerLink" to="/dashboard">Dashboard</Link>
+          <Link className="burgerLink" to="/" onClick={() => {this._toggleBurger()}}>Explore</Link>
+          <Link className="burgerLink" to="/createNewCampaign" onClick={() => {this._toggleBurger()}}>Create a Campaign</Link>
+          <Link className="burgerLink" to="/search" onClick={() => {this._toggleBurger()}}>Search</Link>
+          <Link className="burgerLink" to="/dashboard" onClick={() => {this._toggleBurger()}}>Dashboard</Link>
           <Link
             className="burgerLink" to="/login" onClick={() => {
               this._toggleBurger();
@@ -74,22 +74,24 @@ export default class Navbar1 extends Component {
             }}
           >Log Out</Link>
         </ul>
-    )
-    :
-    Dropdown = (
-      <ul className="topnav responsive" id="myTopnav">
-        <Link className="burgerLink" to="/">Home</Link>
-        <Link className="burgerLink" to="/login">Create a Campaign</Link>
-        <Link className="burgerLink" to="/search">Search</Link>
-        <Link
-          className="burgerLink" to="/login" onClick={() => {
-            this._toggleBurger();
-            this.props.signOut();
-            // browserHistory.push('/login');
-          }}
-        >Log In</Link>
-      </ul>
-  );
+
+      )
+      :
+      Dropdown = (
+        <ul className="topnav responsive" id="myTopnav">
+          <Link className="burgerLink" to="/" onClick={() => {this._toggleBurger()}}>Explore</Link>
+          <Link className="burgerLink" to="/login" onClick={() => {this._toggleBurger()}}>Create a Campaign</Link>
+          <Link className="burgerLink" to="/search" onClick={() => {this._toggleBurger()}}>Search</Link>
+          {/* <Link className="burgerLink" to="/login">Sign Up</Link> */}
+          <Link
+            className="burgerLink" to="/login" onClick={() => {
+              this._toggleBurger();
+              this.props.signOut();
+              // browserHistory.push('/login');
+            }}
+          >Log In</Link>
+        </ul>
+      );
     }
 
     return (
@@ -99,7 +101,7 @@ export default class Navbar1 extends Component {
             this.props.loggedIn?
               <Menu className="orangeColor mainNav" size="huge" inverted secondary>
                 <Menu.Item
-                  className="navHome" name="home" active={active === 'home'} onClick={() => {
+                  className="navHome" name="explore" active={active === 'home'} onClick={() => {
                     this.handleItemClick('home', '/');
                   }}
                 />
@@ -148,15 +150,19 @@ export default class Navbar1 extends Component {
               :
               <Menu className="orangeColor mainNav" size="huge" inverted secondary>
                 <Menu.Item
-                  name="home" active={active === 'home'} onClick={() => {
+                  className="navHome" name="explore" active={active === 'home'} onClick={() => {
                     this.handleItemClick('home', '/');
                   }}
                 />
                 <Menu.Item
-                  name="Create New Campaign" active={active === 'createNewCamp'} onClick={() => {
+                  className="navNewCampaign" name="Create New Campaign" active={active === 'createNewCamp'} onClick={() => {
                     this.handleItemClick('createNewCamp', '/login');
                   }}
                 />
+                <Menu.Item className="navbarLogo">
+                  <img src="assets/images/affiliatoLogoTransparent.png" alt="Affiliato Logo" />
+                  {/* <Menu.Item src="../../public/assets/images/affiliatoLogo.png" /> */}
+                </Menu.Item>
                 <Menu.Menu position="right">
                   <Menu.Item>
                     {/* <Form> */}
@@ -172,7 +178,7 @@ export default class Navbar1 extends Component {
                     }}
                   /> */}
                   <Menu.Item
-                    name="Log In" active={active === 'logIn'} onClick={() => {
+                    className="navLogout" name="Log In" active={active === 'logIn'} onClick={() => {
                       this.handleItemClick('logIn', '/login');
                     }}
                   />

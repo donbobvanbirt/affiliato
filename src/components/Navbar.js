@@ -74,6 +74,7 @@ export default class Navbar extends Component {
             }}
           >Log Out</Link>
         </ul>
+
       )
       :
       Dropdown = (

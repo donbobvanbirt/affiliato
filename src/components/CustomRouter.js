@@ -10,6 +10,7 @@ import SearchPage from './SearchPage';
 import Login from './Login';
 import Dashboard from './Dashboard';
 import Home from './Home';
+import SignUp from './SignUp';
 
 // import SignIn from './SignIn';
 import Secret from './Secret';
@@ -27,6 +28,7 @@ export default class CustomRouter extends Component {
       <Router history={browserHistory}>
         <Route path="/" component={Layout}>
           <IndexRoute component={Home} />
+          <Route path="/signUp" component={SignUp} />
           <Route path="/createNewCampaign" component={CampaignForm} onEnter={authCheck} />
           <Route path="/campaignProfile/:id" component={ClientPage} />
           <Route path="/search/:query" component={SearchPage} />

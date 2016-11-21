@@ -8,49 +8,100 @@ export function signInWithGoogle() {
   return authenticate(provider);
 }
 
+export function signUpWithUserandPassword(credentials) {
+  return signUp(credentials.email, credentials.password);
+}
+
+function signUp(email, password) {
+  let resultHolder;
+  let dbUserHolder;
+  return (dispatch) => {
+    console.log('working:');
+    firebaseAuth.createUserWithEmailAndPassword(email, password)
+    .then((res) => {
+      resultHolder = res;
+      console.log('res:', res);
+      const { uid } = res;
+      return axios.get(`api/users/uid/${uid}`);
+    })
+    .then((user) => {
+      if (user.data) {
+        return user.data;
+      }
+      const { uid } = resultHolder;
+      console.log('resultHolder:', resultHolder);
+      const newUserObj = {
+        uid,
+        username: 'Guest',
+        email: resultHolder.email,
+        name: {
+          first: 'Guest',
+          last: 'Temp',
+        },
+        profilePic: 'none',
+      };
+      return axios.post('/api/users', newUserObj);
+    })
+    .then((dbUser) => {
+      dbUserHolder = dbUser;
+      if (dbUser.campaign.length) {
+        return axios.get(`/api/campaigns/${dbUser.campaign[0]}`);
+      }
+      return null;
+    })
+    .then((campaign) => {
+      if (campaign) {
+        campaign = campaign.data[0];
+      }
+      dispatch(signInSuccess(resultHolder, dbUserHolder, campaign));
+    })
+    .catch(err => dispatch(signInError(err)))
+  };
+}
+
 function authenticate(provider) {
   let resultHolder;
   let dbUserHolder;
   return dispatch => {
     firebaseAuth.signInWithPopup(provider)
-      .then(result => {
-        resultHolder = result;
-        let { uid } = result.user;
-        return axios.get(`/api/users/uid/${uid}`)
-      })
-      .then(user => {
-        if (user.data) {
-          return user.data;
-        } else {
-          let { email, displayName, photoURL, uid } = resultHolder.user;
-          let newUserObj = {
-            uid,
-            username: displayName,
-            email,
-            name: {
-              first: displayName.split(' ')[0],
-              last: displayName.split(' ')[1]
-            },
-            profilePic: photoURL
-          };
-          return axios.post(`/api/users`, newUserObj)
-        }
-      })
-      .then(dbUser => {
-        dbUserHolder = dbUser;
-        if (dbUser.campaign.length) {
-          return axios.get(`/api/campaigns/${dbUser.campaign[0]}`)
-        } else {
-          return null;
-        }
-      })
-      .then(campaign => {
-        if (campaign) {
-          campaign = campaign.data[0];
-        }
-        dispatch(signInSuccess(resultHolder, dbUserHolder, campaign))
-      })
-      .catch(err => dispatch(signInError(err)))
+    .then(result => {
+      resultHolder = result;
+      let { uid } = result.user;
+      return axios.get(`/api/users/uid/${uid}`)
+    })
+    .then(user => {
+      if (user.data) {
+        return user.data;
+      } else {
+        let { email, displayName, photoURL, uid } = resultHolder.user;
+        let newUserObj = {
+          uid,
+          username: displayName,
+          email,
+          name: {
+            first: displayName.split(' ')[0],
+            last: displayName.split(' ')[1],
+          },
+          profilePic: photoURL,
+        };
+        return axios.post(`/api/users`, newUserObj);
+      }
+    })
+    .then(dbUser => {
+      dbUserHolder = dbUser;
+      if (dbUser.campaign.length) {
+        return axios.get(`/api/campaigns/${dbUser.campaign[0]}`)
+      } else {
+        return null;
+      }
+    })
+    .then(campaign => {
+      if (campaign) {
+        campaign = campaign.data[0];
+      }
+      dispatch(signInSuccess(resultHolder, dbUserHolder, campaign))
+    })
+    .catch(err => dispatch(signInError(err)))
   }
 }
 
@@ -100,7 +151,7 @@ function signInError(err) {
 export function signOut() {
   return dispatch => {
     firebaseAuth.signOut()
-      .then(() => dispatch(signOutSuccess()));
+    .then(() => dispatch(signOutSuccess()));
   }
 }
 
@@ -111,22 +162,22 @@ export function initAuth(dispatch) {
         if (user) {
           let dbUserHolder;
           axios.get(`/api/users/uid/${user.uid}`)
-            .then(dbUser => {
-              dbUser = dbUser.data;
-              dbUserHolder = dbUser;
-              console.log('dbUser.campaign:', dbUser.campaign);
-              if (dbUser.campaign && dbUser.campaign.length) {
-                return axios.get(`/api/campaigns/${dbUser.campaign[0]}`)
-              } else {
-                return null;
-              }
-            })
-            .then(campaign => {
-              if (campaign) {
-                campaign = campaign.data[0];
-              }
-              dispatch(initAuthSuccess(user, dbUserHolder, campaign));
-            })
+          .then(dbUser => {
+            dbUser = dbUser.data;
+            dbUserHolder = dbUser;
+            console.log('dbUser.campaign:', dbUser.campaign);
+            if (dbUser.campaign && dbUser.campaign.length) {
+              return axios.get(`/api/campaigns/${dbUser.campaign[0]}`)
+            } else {
+              return null;
+            }
+          })
+          .then(campaign => {
+            if (campaign) {
+              campaign = campaign.data[0];
+            }
+            dispatch(initAuthSuccess(user, dbUserHolder, campaign));
+          })
         }
         unsub();
         resolve();
@@ -141,18 +192,18 @@ export function initAuth(dispatch) {
 
 export function checkProtectedRoute() {
   firebaseAuth.currentUser.getToken()
-    .then(token => {
-      return axios.get('/api/secret', {
-        headers: {
-          'x-auth-token': token
-        }
-      })
+  .then(token => {
+    return axios.get('/api/secret', {
+      headers: {
+        'x-auth-token': token
+      }
     })
-    .then(res => {
-      return res.data;
-    })
-    .then(data=> data)
-    .catch(err => {
-      console.log('err:', err);
-    })
+  })
+  .then(res => {
+    return res.data;
+  })
+  .then(data=> data)
+  .catch(err => {
+    console.log('err:', err);
+  })
 }

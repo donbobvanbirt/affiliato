@@ -11,7 +11,7 @@ Deployed on Heroku [here](https://warm-river-73199.herokuapp.com/).
 
 Latest Release: November 20rd, 2016.
 
-<img src="http://imgur.com/N8YpPxV" />
+<img src="http://i.imgur.com/N8YpPxV.jpg" />
 
 ## CONTRIBUTORS:
   1. [Zhaggy Magauina](https://github.com/Zhaggy)

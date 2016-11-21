@@ -41,7 +41,7 @@ export default class CampaignForm extends Component {
           <Button fluid primary onClick={() => {
             browserHistory.push('/signUp');
           }
-          }><Icon name='google' size='large'></Icon>Sign Up With Email</Button>
+          }><Icon name='email' color='red' size='large'></Icon>Sign Up With Email</Button>
         </Container>
       </div>
     );

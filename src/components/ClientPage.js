@@ -64,6 +64,7 @@ export default class ClientPage extends Component {
       campDescription = campaign.description;
       postWidget = <PostsWidget campaign={campaign} />;
       if (campaign.twitterHandle) {
+        console.log('campaign.twitterHandle:', campaign.twitterHandle)
         tweetList = (
           <Tweets twitterUserName={campaign.twitterHandle} />
         )

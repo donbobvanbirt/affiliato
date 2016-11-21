@@ -5,7 +5,7 @@
 [![node](https://img.shields.io/node/v/gh-badges.svg?maxAge=2592000?style=plastic)]()
 
 ## DESCRIPTION:
-Affiliato is a platform where organizations or individuals can share affiliate links. Fans and supporters can do their online shopping through a campaign's affiliate links and support who they want without spending any extra money.
+Affiliato is a platform where organizations and individuals can share affiliate links. Fans and supporters can do their online shopping through a campaign's affiliate links and support who they want without spending any extra money.
 
 Deployed on Heroku [here](https://warm-river-73199.herokuapp.com/).
 

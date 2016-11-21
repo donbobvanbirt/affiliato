@@ -9,6 +9,9 @@
   font-weight: bold;
   text-align: center;
 }
+.calltoaction {
+  align-self: center;
+}
 .flexCenter {
   display: flex;
   justify-content: center;

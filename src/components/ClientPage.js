@@ -175,7 +175,7 @@ export default class ClientPage extends Component {
                 </Card.Content>
               </Container>
             </Card>
-            <Image src='https://s21.postimg.org/ndnzlssrr/calltoaction.png' size='medium'></Image>
+            <Image className="calltoaction" src='https://s21.postimg.org/ndnzlssrr/calltoaction.png' size='medium'></Image>
           </div>
         </aside>
         <footer className="footer">Copyright Affiliato 2016</footer>

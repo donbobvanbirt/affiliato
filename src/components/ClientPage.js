@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Button, Header, Grid, Image, Card, Input, Statistic, Segment } from 'semantic-ui-react';
+import { Container, Button, Header, Grid, Image, Card, Input, Statistic, Segment, Icon } from 'semantic-ui-react';
 import * as CampaignActions from '../actions/CampaignActions';
+
 import PostsWidget from './PostsWidget';
+import Tweets from './Tweets';
 
 @connect(state => ({
   campaign: state.campaign[0],
@@ -19,7 +21,8 @@ export default class ClientPage extends Component {
 
   trackClick() {
     let { campaign, trackClick } = this.props;
-    campaign.affiliates[0].clicks++;
+    campaign.affiliates[0].clicks += 1;
+    document.open(`${campaign.affiliates[0].url}`, 'Affiliate Link', "location=yes,resizable=yes,scrollbars=yes,status=yes");
     trackClick(campaign);
   }
 
@@ -28,30 +31,43 @@ export default class ClientPage extends Component {
     this.props.setCampaign(id);
   }
 
+  tweet() {
+    let { campaign } = this.props;
+    const status = `Support me on Affiliato. https://affiliato.com/campaignprofile/${campaign._id}`;
+    document.open(`http://twitter.com/home?status=${status}`, "Share on Twitter", "location=yes,resizable=yes,scrollbars=yes,status=yes");
+  }
+
+
   render() {
     let { campaign } = this.props;
     console.log('campaign', campaign);
-    const { Label, Value } = Statistic;
+    // const { Label, Value } = Statistic;
     let who;
     let money;
     let amazonLink;
     let headerImg;
     let profileImg;
     let storyPic;
-    let linkClicks = 0;
+    // let linkClicks = 0;
     let campTitle;
     let campDescription;
     let postWidget;
+    let tweetList = '';
 
     if (campaign) {
       const amazon = campaign.affiliates[0];
       headerImg = campaign.assets.header;
       profileImg = campaign.assets.profile;
       storyPic = campaign.assets.storyImg;
-      linkClicks = campaign.affiliates[0].clicks;
+      // linkClicks = campaign.affiliates[0].clicks;
       campTitle = campaign.title;
       campDescription = campaign.description;
       postWidget = <PostsWidget campaign={campaign} />;
+      if (campaign.twitterHandle) {
+        tweetList = (
+          <Tweets twitterUserName={campaign.twitterHandle} />
+        )
+      }
       if (amazon) {
         amazonLink = amazon.url;
       }
@@ -81,22 +97,25 @@ export default class ClientPage extends Component {
       }
     }
     return (
-      <Container className="campaign-form">
+      <Container className="paddingzero">
         <Grid celled="internally">
           <Grid.Row>
-            <Grid.Column width={16}>
+            <Grid.Column className='paddingzero' width={16}>
               <Image src={headerImg} height="1px" fluid />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
             <Grid.Column textAlign="center" width={3}>
-              <Image src={profileImg} shape="circular" />
-              <Statistic>
-                <Value value={linkClicks} />
-                <Label label="Clicks" />
-              </Statistic>
+              <Image src={profileImg} className="marginzero" shape="circular" />
+              <h3>Share this campaign on Twitter</h3>
+              <Button color="twitter" onClick={this.tweet.bind(this)}>
+                <Icon name="twitter" /> Tweet It
+              </Button>
+              {/* <Button color='facebook' onClick={this.fbPoster.bind(this)}>
+                <Icon name='facebook' /> Post it
+              </Button> */}
             </Grid.Column>
-            <Grid.Column width={8}>
+            <Grid.Column width={8} className='whitebg'>
               <Container>
                 <Image src={storyPic} />
                 <Header as="h2" attached="top">
@@ -113,7 +132,6 @@ export default class ClientPage extends Component {
                   Recent Posts
                 </Header>
                 {postWidget}
-
               </Container>
             </Grid.Column>
             <Grid.Column width={5}>
@@ -141,6 +159,8 @@ export default class ClientPage extends Component {
                   </Card.Content>
                 </Container>
               </Card>
+              <div id="tweetWidget"></div>
+              {tweetList}
             </Grid.Column>
           </Grid.Row>
         </Grid>

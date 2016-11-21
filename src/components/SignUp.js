@@ -4,19 +4,22 @@ import { Container, Button, Form ,Header, Icon} from "semantic-ui-react";
 import * as CampaignActions from '../actions/CampaignActions';
 import { browserHistory } from 'react-router';
 
-import { signInWithGoogle } from '../actions/auth';
+import { signUpWithUserandPassword, signInWithGoogle } from '../actions/auth';
 
 
 @connect(state => ({}), dispatch => ({
   googleSignIn() {
     dispatch(signInWithGoogle());
+  },
+  signUp(credentials) {
+    dispatch(signUpWithUserandPassword(credentials));
   }
 }))
-export default class CampaignForm extends Component {
-  submitLogin = (e, values) => {
+export default class SignUp extends Component {
+  submitSignUp = (e, credentials) => {
     e.preventDefault();
-    console.log('values:', values);
-    // action to check auth(values);
+    this.props.signUp(credentials);
+
   }
   render() {
     return (
@@ -26,10 +29,10 @@ export default class CampaignForm extends Component {
             <Icon name="user" />
             Login to Affiliato
           </Header>
-          <Form onSubmit={this.submitLogin}>
-            <Form.Input label="Username" name="username" placeholder="Username" />
+          <Form onSubmit={this.submitSignUp}>
+            <Form.Input label="Username" name="email" placeholder="Email" />
             <Form.Input label="Password" name="password" placeholder="Password" type='password'/>
-            <Button fluid default type="submit">Login</Button>
+            <Button fluid default type="submit">Sign Up</Button>
           </Form>
           <hr/>
           <p class='text-center or'>OR</p>

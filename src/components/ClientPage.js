@@ -139,7 +139,7 @@ export default class ClientPage extends Component {
           </Container>
         </article>
         <aside className="aside aside-1">
-          <Image dimmer bordered className="prof-img" size="small" src={profileImg && photoURL}></Image>
+          <Image dimmer bordered className="prof-img" size="small" src={photoURL ? photoURL : profileImg}></Image>
           <p>{displayName}</p>
           <h3>Share this campaign on Twitter</h3>
           <Button color="twitter" onClick={this.tweet.bind(this)}>

@@ -12,16 +12,17 @@
 .flexCenter {
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 
 .prof-img {
   border-radius: 7%;
   margin: 0 auto;
-  margin-top: 12px;
+  margin-top: -70px;
 }
 
 .wrapper > * {
-  padding: 10px;
+  padding: 4px;
   flex: 1 100%;
 }
 
@@ -41,16 +42,35 @@
 .aside-1 {
   background: white;
   width: 10%;
+  border: 2px solid #E6E6E6;
+  border-top: none;
 }
 
 .aside-2 {
   background: white;
   width: 10%;
+  border: 2px solid #E6E6E6;
+  border-top: none;
 }
 
 @media all and (min-width: 600px) {
   .aside {
     flex: 1 auto;
+  }
+  .aside-1 {
+    order: 3;
+  }
+
+  .main {
+    order: 2;
+  }
+
+  .aside-2 {
+    order: 1;
+  }
+
+  .footer {
+    order: 4;
   }
 }
 @media all and (min-width: 800px) {
@@ -77,4 +97,11 @@
 
 .ui.card>.content, .ui.cards>.card>.content {
   height: 10em;
+}
+
+.title {
+  color: white;
+  opacity: 0.9;
+  text-shadow: 2px 2px 3px rgba(255,255,255,0.1);
+  margin-right: 20px;
 }

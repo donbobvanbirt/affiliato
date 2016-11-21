@@ -5,7 +5,7 @@ import moment from 'moment'
 const extra = props => (
   <a>
     <Icon name="comment outline" />
-    {moment(props.timestamp).format('h:mm:ss a')}
+    {moment(props.timestamp).format('h:mm:ss a, MMM D Y')}
   </a>
 );
 

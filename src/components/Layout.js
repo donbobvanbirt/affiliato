@@ -11,7 +11,6 @@ export default class Layout extends Component {
   render () {
     return (
       <div>
-        <Link className="burgerLink" to="/signUp">Sign Up</Link>
         <Navbar />
         {this.props.children}
       </div>

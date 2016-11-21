@@ -152,7 +152,7 @@ body {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 17px;
+  margin-top: -1px;
 }
 
 .homeMessage {
@@ -379,7 +379,7 @@ ul.topnav li.icon {display: none;}
 @media only screen and (max-width: 780px) {
   .searchFilterContainer {
     padding-top: 0px;
-    height: 320px;
+    height: 320px;home
   }
 }
 

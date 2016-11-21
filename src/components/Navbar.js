@@ -57,7 +57,7 @@ export default class Navbar extends Component {
   render() {
     const { active, burger } = this.state;
 
-    let Dropdown = '';
+    let Dropdown = <ul></ul>;
     if (burger === 'burgerContainer change') {
       this.props.loggedIn?
       Dropdown = (
@@ -81,7 +81,7 @@ export default class Navbar extends Component {
           <Link className="burgerLink" to="/" onClick={() => {this._toggleBurger()}}>Explore</Link>
           <Link className="burgerLink" to="/login" onClick={() => {this._toggleBurger()}}>Create a Campaign</Link>
           <Link className="burgerLink" to="/search" onClick={() => {this._toggleBurger()}}>Search</Link>
-          {/* <Link className="burgerLink" to="/login">Sign Up</Link> */}
+          <Link className="burgerLink" to="/signup" onClick={() => {this._toggleBurger()}}>Sign Up</Link>
           <Link
             className="burgerLink" to="/login" onClick={() => {
               this._toggleBurger();
@@ -171,11 +171,11 @@ export default class Navbar extends Component {
                       </Form.Field>
                     </Form>
                   </Menu.Item>
-                  {/* <Menu.Item
-                    name="Sign Up" active={active === 'signUp'} onClick={() => {
-                      this.handleItemClick('signUp', '/register');
+                  <Menu.Item
+                    className="navLogout" name="Sign Up" active={active === 'signUp'} onClick={() => {
+                      this.handleItemClick('signUp', '/signup');
                     }}
-                  /> */}
+                  />
                   <Menu.Item
                     className="navLogout" name="Log In" active={active === 'logIn'} onClick={() => {
                       this.handleItemClick('logIn', '/login');

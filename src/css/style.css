@@ -18,7 +18,7 @@ searchInputSegment {
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 75px;
-  background-color: #FA7470;
+  background-color: #FF635F;
 }
 
 .searchListContainer {
@@ -53,12 +53,8 @@ body {
 }
 
 .orangeColor {
-  background-color: #FA7470 !important;
+  background-color: #FF635F !important;
   color: #000 !important;
-}
-
-.mainNav {
-  /*height: 50px;*/
 }
 
 .affiliateCard {
@@ -116,21 +112,14 @@ body {
     margin-top: 1em;
 }
 
-/*DELETE TO HERE!*/
-
 /*for the Home Page splash image*/
 .homeImageContainer {
   position: relative;
-  /*display:table-cell;*/
-  /*vertical-align:middle;*/
-  /*text-align:center;*/
 }
 
 .homeImage {
-  /*height: 50%;*/
   height: 650px !important;
   position: absolute;
-  /*max-width: 80% !important;*/
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -165,7 +154,6 @@ h2 span {
   transform: translateX(-50%);
 }
 
-/*div.segment> div.mainNav.menu {*/
 .ui.secondary.inverted.menu {
   position: relative !important;
 }
@@ -194,7 +182,6 @@ h2 span {
 /*Hamburger Menu with CSS only*/
 .burgerContainer {
     display: none;
-    /*display: inline-block;*/
     cursor: pointer;
 }
 
@@ -229,7 +216,10 @@ ul.topnav {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #FA7470;
+    background-color: #FF635F;
+    position: absolute !important;
+    z-index: 2;
+    width: 100%;
 }
 
 /* Float the list items side by side */
@@ -248,7 +238,7 @@ ul.topnav .burgerLink {
 
 /* Change background color of links on hover */
 ul.topnav .burgerLink:hover {
-  color: #FA7470;
+  color: #FF635F;
   background-color: #f2f2f2;
 }
 
@@ -342,14 +332,6 @@ ul.topnav li.icon {display: none;}
   .navHome, .navNewCampaign, .navSearchForm, .navDashboard, .navLogout {
     display: none !important;
   }
-
-  /*.ui.secondary.inverted.menu .active.item {
-    display: none;
-  }
-
-  .ui.seconday.inverted.menu .link.item, .ui.secondary.inverted.menu .a.item {
-    display: none !important;
-  }*/
 }
 
 @media only screen and (max-width: 860px) {
@@ -375,6 +357,5 @@ ul.topnav li.icon {display: none;}
 @media only screen and (max-width: 600px) {
   .homeMessage {
     top: 3% !important;
-    /*top: 10%;*/
   }
 }

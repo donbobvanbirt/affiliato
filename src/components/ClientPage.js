@@ -24,7 +24,7 @@ export default class ClientPage extends Component {
   trackClick() {
     let { campaign, trackClick } = this.props;
     campaign.affiliates[0].clicks += 1;
-    document.open(`http://www.${campaign.affiliates[0].url}`, 'Affiliate Link', "location=yes,resizable=yes,scrollbars=yes,status=yes");
+    document.open(campaign.affiliates[0].url, 'Affiliate Link', "location=yes,resizable=yes,scrollbars=yes,status=yes");
     trackClick(campaign);
   }
 
@@ -163,7 +163,7 @@ export default class ClientPage extends Component {
                 <Card.Description>
                   <Input
                     action={{ color: 'teal', labelPosition: 'right', icon: 'copy' }}
-                    value={`http://www.${amazonLink}`}
+                    value={amazonLink}
                   />
                 </Card.Description>
               </Card.Content>

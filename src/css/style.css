@@ -177,6 +177,41 @@ h2 span {
   display: none !important;
 }
 
+/*DASHBOARD FLEXBOX*/
+.dashboardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  /*flex-direction: column;*/
+  justify-content: center;
+}
+
+.dashboardHeaderIMG {
+  width: 67%;
+  align-self: flex-start;
+}
+
+.dashboardProfile {
+  /*width: 17%;*/
+  order: 1;
+}
+
+.dashboardAbout {
+  /*width: 62%;*/
+  order: 2;
+}
+
+.dashboardAffiliates {
+  /*width: 17%;*/
+  order: 3;
+}
+
+.dashboardProfile, .dashboardAbout, .dashboardAffiliates {
+  align-self: auto;
+  margin: 1%;
+}
+
+
 /*Hamburger Menu with CSS only*/
 /*Hamburger Menu with CSS only*/
 /*Hamburger Menu with CSS only*/

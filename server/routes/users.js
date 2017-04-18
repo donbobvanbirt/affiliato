@@ -18,7 +18,6 @@ router.get('/:id', (req, res) => {
   .catch(err => res.send());
 });
 
-
 // GET ALL USERS
 router.get('/', (req, res) => {
   User.find()

@@ -1,6 +1,6 @@
 <br />
 
-<div align="center"><strong>Affiliato</strong></div>
+<div align="center">##<strong>Affiliato</strong></div>
 <div align="center">Crowdfunding Through Affiliate Links</div>
 
 <br />

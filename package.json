@@ -10,8 +10,8 @@
     "node": "6"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "John Son",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.15.2",
     "babel-core": "^6.17.0",

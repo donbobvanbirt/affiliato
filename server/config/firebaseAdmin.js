@@ -1,11 +1,11 @@
-const admin = require("firebase-admin");
+const admin = require('firebase-admin');
 const path = require('path');
 
-let configPath = path.join(__dirname, '../../firebase-config.json');
+const configPath = path.join(__dirname, '../../firebase-config.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(configPath),
-  databaseURL: "https://test-169da.firebaseio.com"
+  databaseURL: 'https://test-169da.firebaseio.com',
 });
 
 module.exports = admin;

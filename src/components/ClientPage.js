@@ -5,6 +5,8 @@ import * as CampaignActions from '../actions/CampaignActions';
 
 import PostsWidget from './PostsWidget';
 import Tweets from './Tweets';
+import style from '../css/app.css';
+import { firebaseCurrent } from '../firebase';
 
 @connect(state => ({
   campaign: state.campaign[0],
@@ -22,12 +24,12 @@ export default class ClientPage extends Component {
   trackClick() {
     let { campaign, trackClick } = this.props;
     campaign.affiliates[0].clicks += 1;
-    document.open(`${campaign.affiliates[0].url}`, 'Affiliate Link', "location=yes,resizable=yes,scrollbars=yes,status=yes");
+    document.open(`http://www.${campaign.affiliates[0].url}`, 'Affiliate Link', "location=yes,resizable=yes,scrollbars=yes,status=yes");
     trackClick(campaign);
   }
 
   componentWillMount() {
-    let { id } = this.props.params;
+    const { id } = this.props.params;
     this.props.setCampaign(id);
   }
 
@@ -39,6 +41,7 @@ export default class ClientPage extends Component {
 
 
   render() {
+    const { photoURL, displayName } = firebaseCurrent.currentUser;
     let { campaign } = this.props;
     console.log('campaign', campaign);
     // const { Label, Value } = Statistic;
@@ -97,8 +100,88 @@ export default class ClientPage extends Component {
         );
       }
     }
+    const style = {
+      background: `url(${headerImg}) no-repeat center center fixed`,
+    };
     return (
-      <Container className="paddingzero">
+      // <div className="campaignProf">
+      //   <div className="header-Prof" style={style}></div>
+      //   <div className="">
+      //     <Image src={profileImg} className="marginzero" shape="circular" />
+      //     <h3>Share this campaign on Twitter</h3>
+      //     <Button color="twitter" onClick={this.tweet.bind(this)}>
+      //       <Icon name="twitter" /> Tweet It
+      //     </Button>
+      //   </div>
+      //
+      // </div>
+      <div className="wrapper">
+        <header className="header header-Prof" style={style}>
+          <h1 className="title">{campTitle}</h1>
+        </header>
+        <article className="main">
+          <Container>
+            <Image src={storyPic} />
+            <Header as="h2" attached="top">
+              {campTitle}
+            </Header>
+            <Segment size="huge" attached>
+              {campDescription}
+            </Segment>
+          </Container>
+          {who}
+          {money}
+          <Container>
+            <Header as='h2' attached='top'>
+              Recent Posts
+            </Header>
+            {postWidget}
+          </Container>
+        </article>
+        <aside className="aside aside-1">
+          <Image dimmer bordered className="prof-img" size="small" src={photoURL ? photoURL : profileImg}></Image>
+          <p>{displayName}</p>
+          <h3>Share this campaign on Twitter</h3>
+          <Button color="twitter" onClick={this.tweet.bind(this)}>
+            <Icon name="twitter" /> Tweet It
+          </Button>
+          <br/>
+          <div id="tweetWidget"></div>
+          {tweetList}
+        </aside>
+        <aside className="aside aside-2">
+          <div className="flexCenter">
+            <Card className="affiliateCard">
+              <Card.Content>
+                <Image floated="right" size="mini" src="http://www.turnerduckworth.com/media/filer_public/86/18/86187bcc-752a-46f4-94d8-0ce54b98cd46/td-amazon-smile-logo-01-large.jpg" />
+                <Card.Header>
+                  Amazon Online Store
+                </Card.Header>
+                <Card.Meta>
+                  Affiliate Link
+                </Card.Meta>
+                <Card.Description>
+                  <Input
+                    action={{ color: 'teal', labelPosition: 'right', icon: 'copy' }}
+                    value={`http://www.${amazonLink}`}
+                  />
+                </Card.Description>
+              </Card.Content>
+              <Container>
+                <Card.Content extra>
+                  <div className="ui two buttons">
+                    <Button className="affiliateButton" basic fluid size="big" color="teal" onClick={() => this.trackClick()}>Direct Link</Button>
+                  </div>
+                </Card.Content>
+              </Container>
+            </Card>
+            <Image className="calltoaction" src='https://s21.postimg.org/ndnzlssrr/calltoaction.png' size='medium'></Image>
+          </div>
+        </aside>
+        <footer className="footer">Copyright Affiliato 2016</footer>
+      </div>
+      /* <Container className="paddingzero">
+
         <Grid celled="internally">
           <Grid.Row>
             <Grid.Column className='paddingzero' width={16}>
@@ -112,9 +195,7 @@ export default class ClientPage extends Component {
               <Button color="twitter" onClick={this.tweet.bind(this)}>
                 <Icon name="twitter" /> Tweet It
               </Button>
-              {/* <Button color='facebook' onClick={this.fbPoster.bind(this)}>
-                <Icon name='facebook' /> Post it
-              </Button> */}
+
             </Grid.Column>
             <Grid.Column width={8} className='whitebg'>
               <Container>
@@ -165,7 +246,7 @@ export default class ClientPage extends Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      </Container>
+      </Container> */
     );
   }
 }

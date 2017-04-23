@@ -2,10 +2,10 @@ const PORT = process.env.PORT || 8000;
 
 const bodyParser = require('body-parser');
 const express = require('express');
-const http = require('http');
 const morgan = require('morgan');
 const path = require('path');
 const mongoose = require('mongoose');
+// const http = require('http');
 
 const MONGODB_URI = 'mongodb://johnsalay:Elbrus123@ds061246.mlab.com:61246/johndb';
 // const MONGODB_URI = 'mongodb://localhost/affiliatodb';
@@ -32,6 +32,6 @@ require('./config/webpack')(app);
 
 app.use('/api', require('./routes/api'));
 
-app.use('*', function (request, response) {
+app.use('*', (request, response) => {
   response.sendFile(path.join(__dirname, '../public/index.html'));
 });

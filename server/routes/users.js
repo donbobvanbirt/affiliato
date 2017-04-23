@@ -1,6 +1,7 @@
 const express = require('express');
+// const path = require('path');
+
 const router = express.Router();
-const path = require('path');
 
 const User = require('../models/User');
 
@@ -8,14 +9,14 @@ const User = require('../models/User');
 router.get('/uid/:uid', (req, res) => {
   User.findOne({ uid: req.params.uid })
   .then(user => res.send(user))
-  .catch(err => res.send(null));
+  .catch(err => res.send(err));
 });
 
 // FIND USER BY ID
 router.get('/:id', (req, res) => {
   User.findById(req.params.id)
   .then(user => res.send(user))
-  .catch(err => res.send());
+  .catch(err => res.send(err));
 });
 
 // GET ALL USERS

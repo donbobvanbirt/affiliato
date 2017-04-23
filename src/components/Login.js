@@ -32,12 +32,19 @@ export default class CampaignForm extends Component {
             <Button fluid default type="submit">Login</Button>
           </Form>
           <hr/>
-          <p class='text-center or'>OR</p>
           <Button fluid primary onClick={() => {
             this.props.googleSignIn();
             browserHistory.push('/');
           }
           }><Icon name='google' size='large'></Icon>Sign In With Google</Button>
+<<<<<<< HEAD
+=======
+          <p class='text-center or'>OR</p>
+          <Button fluid primary onClick={() => {
+            browserHistory.push('/signUp');
+          }
+          }><Icon name='email' color='red' size='large'></Icon>Sign Up With Email</Button>
+>>>>>>> 472bca59187508fa92c9009d1d8fe780975fc331
         </Container>
       </div>
     );

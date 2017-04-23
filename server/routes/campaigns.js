@@ -98,12 +98,13 @@ router.delete('/:id', (req, res) => {
   const { id } = req.params;
   Campaign.remove({ _id: id })
   // return id;
-  .then(() => {
-    return User.findOneAndUpdate(
+  .then(() => (
+    User.findOneAndUpdate(
       { campaign: id },
       { $pull: { campaign: id } },
-      { new: true });
-  })
+      { new: true }
+    )
+  ))
   .then(user => res.send(user))
   .catch(err => res.status(400).send(err));
 });
